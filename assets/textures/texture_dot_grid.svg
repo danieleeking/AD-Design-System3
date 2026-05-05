@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="18" height="18">
+  <!--
+    AD Design System v1.0 — Texture Token: Dot Grid
+    ID: texture_dot_grid
+    Approved: 2026-05-05
+    Spec: 18px tile · 1.2px radius dot · centered at (9,9)
+    Light mode: fill="#4c6842" (Primary T40) at 15% opacity
+    Dark mode:  fill="#b3d0a9" (Primary T80) at 12% opacity
+    Usage: Page backgrounds — Dashboard, Data Table, Settings, Form
+    Apply as: background-image repeating tile with opacity overlay
+    Do NOT apply to: cards, inputs, navbars, or any surface with text directly on it
+  -->
+  <circle cx="9" cy="9" r="1.2" fill="#4c6842"/>
+</svg>

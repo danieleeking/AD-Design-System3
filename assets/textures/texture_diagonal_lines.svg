@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="12" height="12">
+  <!--
+    AD Design System v1.0 — Texture Token: Diagonal Lines
+    ID: texture_diagonal_lines
+    Approved: 2026-05-05
+    Spec: 12px tile · 0.8px stroke · 45° angle (bottom-left to top-right)
+    Light mode: stroke="#4c6842" (Primary T40) at 15% opacity
+    Dark mode:  stroke="#b3d0a9" (Primary T80) at 12% opacity
+    Usage: Hero strips, Login hero, Profile hero, banner sections, card accent headers
+    Apply as: background-image repeating tile with opacity overlay
+    Do NOT apply to: cards, inputs, navbars, or any surface with text directly on it
+  -->
+  <line x1="0" y1="12" x2="12" y2="0" stroke="#4c6842" stroke-width="0.8"/>
+</svg>

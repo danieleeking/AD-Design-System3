@@ -1,0 +1,3431 @@
+{
+  "_template_machine": {
+    "version": "1.0",
+    "created": "2026-05-03",
+    "engine": "Claude AI-First Design System",
+    "note": "To build a new design system: replace source_colors and meta, then regenerate all tokens using the same M3 tonal palette algorithm.",
+    "status": "IN PROGRESS \u2014 Resume from: Full Page Preview (all components complete)",
+    "widget_rules": {
+      "_note": "Standing rules for every widget rendered in this design system. Apply without exception.",
+      "arvo_font_rule": {
+        "APPROVED": "2026-05-03",
+        "MANDATORY_FONT_LINKS": [
+          "<link href='https://unpkg.com/@fontsource/arvo/700.css' rel='stylesheet'>",
+          "<link href='https://unpkg.com/@fontsource/inter/400.css' rel='stylesheet'>",
+          "<link href='https://unpkg.com/@fontsource/inter/500.css' rel='stylesheet'>"
+        ],
+        "BLOCKED_DO_NOT_USE": "fonts.googleapis.com \u2014 BLOCKED by sandbox CSP. Silently fails with no error. Font falls back to Georgia serif. This is how Arvo disappears.",
+        "css_required_in_every_widget": ".arvo { font-family: 'Arvo', Georgia, serif; font-weight: 700; } body, .inter { font-family: 'Inter', sans-serif; }",
+        "arvo_usage": "DISPLAY ONLY \u2014 main page headline (h1) when large visual emphasis is needed. ONE instance per screen maximum. Never for subheads, section titles, card titles, stat labels, nav, or any supporting text. If in doubt, use Inter 500.",
+        "inter_usage": "ALL other text without exception: section titles/subheads (Inter 500), body copy (Inter 400), nav links (Inter 500), table data (Inter 400), chip labels (Inter 500), badge text (Inter 500), button labels (Inter 500), metric labels (Inter 500), metric values (Inter 500), card titles (Inter 500), captions (Inter 400).",
+        "enforcement_note": "Before rendering any widget, verify the <link> tags use unpkg.com NOT googleapis.com. If Arvo is not visually distinct from surrounding body text, the font has not loaded.",
+        "ARVO_RULE": "ASK: Is this the single most important headline on this screen? Is it large (display scale, 24px+)? If both YES \u2192 Arvo. Otherwise \u2192 Inter 500."
+      },
+      "font_usage_rule": {
+        "arvo_approved_uses": [
+          "Hero h1 \u2014 main page headline, 24px or larger, one per screen"
+        ],
+        "arvo_never_use_for": [
+          "Section subheads (use Inter 500 instead)",
+          "Card titles (use Inter 500)",
+          "Stat/metric labels (use Inter 500)",
+          "Nav links (use Inter 500)",
+          "Any text below 24px",
+          "Any secondary or supporting headline"
+        ],
+        "inter_500_uses": [
+          "Section subheads and titles",
+          "Card titles and headers",
+          "Metric values and labels",
+          "Nav links",
+          "Button labels",
+          "Chip and badge text",
+          "Table column headers"
+        ],
+        "inter_400_uses": [
+          "Body copy",
+          "Table row data",
+          "Captions and helper text",
+          "Descriptions and subtitles"
+        ]
+      },
+      "standard_style_header": {
+        "_note": "Use this block in every widget header. Toggle MUST be a <div>, not a <button>.",
+        "header_bg": "#4c6842",
+        "header_text": "#ffffff",
+        "toggle_bg": "#4a5d40",
+        "toggle_text": "#000000",
+        "toggle_border": "1px solid rgba(0,0,0,0.45)",
+        "toggle_element": "div",
+        "logo_width": "120px",
+        "logo_height": "80px",
+        "logo_fill": "#ffffff"
+      },
+      "toggle_button": {
+        "bg": "#4a5d40",
+        "color": "#000000",
+        "border": "1px solid rgba(0,0,0,0.45)",
+        "element": "div (NOT button \u2014 host CSS overrides background on <button> elements)",
+        "note": "Use !important on background, color, and border to prevent host CSS interference. APPROVED 2026-05-04.",
+        "css_snippet": ".tbtn { background: #4a5d40 !important; color: #000000 !important; border: 1px solid rgba(0,0,0,0.45) !important; padding: 6px 16px; border-radius: 4px; font-size: 12px; font-weight: 500; letter-spacing: .04em; cursor: pointer; display: inline-block; user-select: none; }"
+      }
+    },
+    "resume_instructions": "1. Read this JSON file in full. 2. Read session_log for all approved decisions. 3. Apply widget_rules (Arvo + Inter fonts via unpkg.com, toggle button as <div class='tbtn'>, real AD SVG logo inline). 4. ALL components are COMPLETE. 5. ALL 6 page patterns are COMPLETE. 6. Design system is FULLY COMPLETE as of 2026-05-05. Next steps could include: component documentation export, developer handoff guide, or additional page patterns as needed."
+  },
+  "meta": {
+    "client": "Affiliated Distributors",
+    "brand_short": "AD",
+    "url": "https://adhq.com",
+    "industry": "Industrial Distribution",
+    "personality": "Professional & Trustworthy",
+    "designed_by": "Claude AI-First Design System Engine",
+    "design_system_name": "AD Design System"
+  },
+  "source_colors": {
+    "primary": "#4c6842",
+    "primary_name": "Forest Green",
+    "secondary": "#494e52",
+    "secondary_name": "Steel Slate",
+    "tertiary": "#885400",
+    "tertiary_name": "Warm Amber",
+    "tertiary_source": "M3 best practice \u2014 ~60\u00b0 hue offset from primary (primary H=104\u00b0, tertiary H=41\u00b0). Amber chosen over teal for industrial warmth and CTA energy.",
+    "tertiary_status": "APPROVED by Dan \u2014 2026-05-03",
+    "error": "#B3261E",
+    "neutral_source": "Derived from secondary slate hue"
+  },
+  "palettes": {
+    "primary": {
+      "T0": "#000000",
+      "T10": "#0d1a0b",
+      "T20": "#1f3a1a",
+      "T30": "#2f5229",
+      "T40": "#4c6842",
+      "T50": "#607f56",
+      "T60": "#799a6e",
+      "T70": "#95b589",
+      "T80": "#b3d0a9",
+      "T90": "#cde3c4",
+      "T95": "#def0d7",
+      "T99": "#f4faf1",
+      "T100": "#ffffff"
+    },
+    "secondary": {
+      "T0": "#000000",
+      "T10": "#121517",
+      "T20": "#252b2e",
+      "T30": "#373f43",
+      "T40": "#494e52",
+      "T50": "#5f6769",
+      "T60": "#798184",
+      "T70": "#97a0a3",
+      "T80": "#b4bec2",
+      "T90": "#d1dadd",
+      "T95": "#e3eaed",
+      "T99": "#f4f7f8",
+      "T100": "#ffffff"
+    },
+    "tertiary": {
+      "T0": "#000000",
+      "T10": "#231500",
+      "T20": "#4a2e00",
+      "T30": "#6d4400",
+      "T40": "#885400",
+      "T50": "#b8770a",
+      "T60": "#d4952e",
+      "T70": "#e8b45c",
+      "T80": "#f2cc88",
+      "T90": "#fae3bc",
+      "T95": "#fcf0d9",
+      "T99": "#fefbf4",
+      "T100": "#ffffff"
+    },
+    "error": {
+      "T0": "#000000",
+      "T10": "#410E0B",
+      "T20": "#601410",
+      "T30": "#8C1D18",
+      "T40": "#B3261E",
+      "T50": "#DC362E",
+      "T60": "#E46962",
+      "T70": "#EC928E",
+      "T80": "#F2B8B5",
+      "T90": "#F9DEDC",
+      "T95": "#FCEEEE",
+      "T99": "#FFFBF9",
+      "T100": "#ffffff"
+    },
+    "neutral": {
+      "T0": "#000000",
+      "T10": "#191c17",
+      "T20": "#2e312c",
+      "T30": "#444741",
+      "T40": "#5c5f5a",
+      "T50": "#747872",
+      "T60": "#8e918b",
+      "T70": "#a9aca6",
+      "T80": "#c5c8c1",
+      "T90": "#e1e4dd",
+      "T95": "#eff2ea",
+      "T99": "#f8fbf3",
+      "T100": "#ffffff"
+    },
+    "neutral_variant": {
+      "T0": "#000000",
+      "T10": "#161d16",
+      "T20": "#2b322b",
+      "T30": "#414941",
+      "T40": "#596158",
+      "T50": "#717a70",
+      "T60": "#8b938a",
+      "T70": "#a5ada4",
+      "T80": "#c1c9bf",
+      "T90": "#dde5db",
+      "T95": "#ebf3e9",
+      "T99": "#f5fdf3",
+      "T100": "#ffffff"
+    }
+  },
+  "tokens": {
+    "color": {
+      "light": {
+        "primary": "#4c6842",
+        "on_primary": "#ffffff",
+        "primary_container": "#cde3c4",
+        "on_primary_container": "#0d1a0b",
+        "secondary": "#494e52",
+        "on_secondary": "#ffffff",
+        "secondary_container": "#d1dadd",
+        "on_secondary_container": "#121517",
+        "tertiary": "#885400",
+        "on_tertiary": "#ffffff",
+        "tertiary_container": "#fae3bc",
+        "on_tertiary_container": "#231500",
+        "error": "#B3261E",
+        "on_error": "#ffffff",
+        "error_container": "#F9DEDC",
+        "on_error_container": "#410E0B",
+        "background": "#f8faf5",
+        "on_background": "#191c17",
+        "surface": "#f8faf5",
+        "on_surface": "#191c17",
+        "surface_variant": "#dde5db",
+        "on_surface_variant": "#414941",
+        "surface_dim": "#d8dbd3",
+        "surface_bright": "#f8faf5",
+        "surface_container_lowest": "#ffffff",
+        "surface_container_low": "#f2f5ed",
+        "surface_container": "#eceee7",
+        "surface_container_high": "#e7e9e1",
+        "surface_container_highest": "#e1e4dc",
+        "outline": "#717a6e",
+        "outline_variant": "#c1c9bc",
+        "shadow": "#000000",
+        "scrim": "#000000",
+        "inverse_surface": "#2e312c",
+        "inverse_on_surface": "#eef1e8",
+        "inverse_primary": "#b3d0a9"
+      },
+      "dark": {
+        "primary": "#b3d0a9",
+        "on_primary": "#1f3a1a",
+        "primary_container": "#2f5229",
+        "on_primary_container": "#cde3c4",
+        "secondary": "#b4bec2",
+        "on_secondary": "#252b2e",
+        "secondary_container": "#373f43",
+        "on_secondary_container": "#d1dadd",
+        "tertiary": "#f2cc88",
+        "on_tertiary": "#4a2e00",
+        "tertiary_container": "#6d4400",
+        "on_tertiary_container": "#fae3bc",
+        "error": "#F2B8B5",
+        "on_error": "#601410",
+        "error_container": "#8C1D18",
+        "on_error_container": "#F9DEDC",
+        "background": "#191c17",
+        "on_background": "#e2e5db",
+        "surface": "#191c17",
+        "on_surface": "#e2e5db",
+        "surface_variant": "#414941",
+        "on_surface_variant": "#c1c9bc",
+        "surface_dim": "#191c17",
+        "surface_bright": "#3f423b",
+        "surface_container_lowest": "#141710",
+        "surface_container_low": "#191c17",
+        "surface_container": "#1e211b",
+        "surface_container_high": "#282b25",
+        "surface_container_highest": "#33362f",
+        "outline": "#8b938a",
+        "outline_variant": "#414941",
+        "shadow": "#000000",
+        "scrim": "#000000",
+        "inverse_surface": "#e2e5db",
+        "inverse_on_surface": "#2e312c",
+        "inverse_primary": "#4c6842"
+      }
+    },
+    "typography": {
+      "_font_family_display": "Arvo, Georgia, 'Times New Roman', serif",
+      "_font_family_primary": "Inter, system-ui, -apple-system, sans-serif",
+      "_font_family_mono": "JetBrains Mono, Menlo, monospace",
+      "_note": "RULE: Arvo is DISPLAY ONLY \u2014 hero moments, large stat numbers, primary page heroes. Everything else is Inter (sans-serif). Headlines, titles, body, labels, nav, buttons, inputs \u2014 all Inter. This keeps Arvo feeling special and impactful.",
+      "_font_source": "Arvo: Google Fonts / @fontsource/arvo (unpkg). Inter: @fontsource/inter (unpkg).",
+      "_font_approved": "APPROVED by Dan \u2014 2026-05-03",
+      "display_large": {
+        "size": "72px",
+        "line_height": "72px",
+        "weight": "700",
+        "tracking": "-1px",
+        "font": "display",
+        "transform": "uppercase",
+        "_note": "ARVO \u2014 hero headlines, page heroes only"
+      },
+      "display_medium": {
+        "size": "57px",
+        "line_height": "60px",
+        "weight": "700",
+        "tracking": "-0.5px",
+        "font": "display",
+        "transform": "uppercase",
+        "_note": "ARVO \u2014 large section hero text"
+      },
+      "display_small": {
+        "size": "45px",
+        "line_height": "48px",
+        "weight": "700",
+        "tracking": "0",
+        "font": "display",
+        "transform": "uppercase",
+        "_note": "ARVO \u2014 stat numbers, impactful callouts"
+      },
+      "headline_large": {
+        "size": "36px",
+        "line_height": "42px",
+        "weight": "600",
+        "tracking": "0",
+        "font": "primary",
+        "_note": "INTER \u2014 section headers, page titles"
+      },
+      "headline_medium": {
+        "size": "28px",
+        "line_height": "36px",
+        "weight": "600",
+        "tracking": "0",
+        "font": "primary",
+        "_note": "INTER \u2014 card headers, sub-section titles"
+      },
+      "headline_small": {
+        "size": "22px",
+        "line_height": "30px",
+        "weight": "600",
+        "tracking": "0",
+        "font": "primary",
+        "_note": "INTER \u2014 smaller section headers"
+      },
+      "title_large": {
+        "size": "18px",
+        "line_height": "26px",
+        "weight": "600",
+        "tracking": "0",
+        "font": "primary",
+        "_note": "INTER \u2014 card titles, dialog titles"
+      },
+      "title_medium": {
+        "size": "16px",
+        "line_height": "24px",
+        "weight": "500",
+        "tracking": "0.15px",
+        "font": "primary",
+        "_note": "INTER \u2014 list titles, nav items"
+      },
+      "title_small": {
+        "size": "14px",
+        "line_height": "20px",
+        "weight": "500",
+        "tracking": "0.1px",
+        "font": "primary",
+        "_note": "INTER \u2014 small titles, overlines"
+      },
+      "body_large": {
+        "size": "16px",
+        "line_height": "26px",
+        "weight": "400",
+        "tracking": "0.25px",
+        "font": "primary",
+        "_note": "INTER"
+      },
+      "body_medium": {
+        "size": "14px",
+        "line_height": "22px",
+        "weight": "400",
+        "tracking": "0.25px",
+        "font": "primary",
+        "_note": "INTER"
+      },
+      "body_small": {
+        "size": "12px",
+        "line_height": "18px",
+        "weight": "400",
+        "tracking": "0.4px",
+        "font": "primary",
+        "_note": "INTER"
+      },
+      "label_large": {
+        "size": "13px",
+        "line_height": "20px",
+        "weight": "500",
+        "tracking": "0.8px",
+        "font": "primary",
+        "transform": "uppercase",
+        "_note": "INTER \u2014 nav labels, section labels"
+      },
+      "label_medium": {
+        "size": "12px",
+        "line_height": "16px",
+        "weight": "500",
+        "tracking": "0.8px",
+        "font": "primary",
+        "transform": "uppercase",
+        "_note": "INTER \u2014 button text, chip text"
+      },
+      "label_small": {
+        "size": "11px",
+        "line_height": "16px",
+        "weight": "500",
+        "tracking": "0.8px",
+        "font": "primary",
+        "transform": "uppercase",
+        "_note": "INTER \u2014 badges, overlines"
+      },
+      "_font_rule_updated": "2026-05-03 \u2014 Arvo restricted to display roles only per Dan"
+    },
+    "spacing": {
+      "_status": "COMPLETE \u2014 2026-05-05",
+      "_note": "8pt base grid. All spacing values are multiples of 4px.",
+      "base_unit": "4px",
+      "scale": {
+        "sp-0": "0px",
+        "sp-1": "4px",
+        "sp-2": "8px",
+        "sp-3": "12px",
+        "sp-4": "16px",
+        "sp-5": "20px",
+        "sp-6": "24px",
+        "sp-8": "32px",
+        "sp-10": "40px",
+        "sp-12": "48px",
+        "sp-16": "64px",
+        "sp-20": "80px",
+        "sp-24": "96px"
+      },
+      "component_padding": {
+        "xs": "4px 8px",
+        "sm": "6px 12px",
+        "md": "8px 16px",
+        "lg": "12px 24px",
+        "xl": "16px 32px"
+      },
+      "layout": {
+        "page_margin_mobile": "16px",
+        "page_margin_tablet": "24px",
+        "page_margin_desktop": "32px",
+        "column_gutter": "16px",
+        "section_gap": "32px",
+        "card_gap": "16px"
+      }
+    },
+    "border_width": {
+      "_note": "1px is the system default for all visible borders. Hairlines (0.5px) reserved for dividers and subtle separators only. Never use 2px except focus rings.",
+      "_approved": "APPROVED by Dan \u2014 2026-05-03",
+      "none": "0px",
+      "hairline": "0.5px",
+      "default": "1px",
+      "focus": "2px",
+      "_defaults": {
+        "button_filled": "none \u2014 filled buttons have no border",
+        "button_outlined": "1px solid \u2014 outline-variant color",
+        "button_tonal": "none \u2014 tonal buttons have no border",
+        "button_text": "none",
+        "card_elevated": "1px solid \u2014 outline-variant color, subtle on shadow cards",
+        "card_filled": "1px solid \u2014 outline-variant color",
+        "card_outlined": "1px solid \u2014 outline color (stronger than variant)",
+        "input_outlined": "1px solid \u2014 outline color, 2px on focus",
+        "chip": "1px solid \u2014 outline-variant color",
+        "dialog": "none",
+        "divider": "0.5px solid \u2014 hairline only"
+      }
+    },
+    "border_radius": {
+      "_personality_note": "Outdoor/industrial update: sharp-edged default (4px). Rugged, decisive, grounded \u2014 mirrors the angular AD logo diamond and canyon terrain. Softness reserved for dialogs and FABs only.",
+      "none": "0px",
+      "xs": "4px",
+      "sm": "8px",
+      "md": "12px",
+      "lg": "16px",
+      "xl": "24px",
+      "2xl": "32px",
+      "full": "9999px",
+      "_defaults": {
+        "button": "xs (4px)  \u2014 decisive, AD-brand angular",
+        "button_cta": "xs (4px)  \u2014 JOIN AD style, no softness",
+        "card": "sm (8px)  \u2014 slight ease, still structured",
+        "chip": "xs (4px)  \u2014 filter chips stay sharp",
+        "dialog": "md (12px) \u2014 only place with moderate rounding",
+        "input": "xs (4px)  \u2014 form fields are workmanlike",
+        "badge_status": "xs (4px)  \u2014 status tags stay angular",
+        "badge_count": "full      \u2014 numeric count bubbles only",
+        "fab": "sm (8px)  \u2014 FAB has slight roundness",
+        "nav_drawer": "none (0px) \u2014 full-bleed panels"
+      },
+      "_outdoor_rationale": "The AD logo uses a sharp diamond/mountain geometry. Canyon terrain is angular. 4px radius reads as grounded and rugged \u2014 not corporate-soft. This differentiates AD from generic SaaS."
+    },
+    "elevation": {
+      "_status": "COMPLETE \u2014 2026-05-05",
+      "_note": "Flat-first design system. Elevation communicated through tonal surface color shifts, not drop shadows.",
+      "levels": {
+        "level-0": {
+          "surface": "surface",
+          "note": "Base \u2014 no elevation"
+        },
+        "level-1": {
+          "surface": "surface-container-low",
+          "note": "Cards, drawers \u2014 slight lift"
+        },
+        "level-2": {
+          "surface": "surface-container",
+          "note": "Dropdowns, menus"
+        },
+        "level-3": {
+          "surface": "surface-container-high",
+          "note": "Dialogs, modals"
+        },
+        "level-4": {
+          "surface": "surface-container-highest",
+          "note": "Navigation drawers"
+        },
+        "level-5": {
+          "surface": "surface-container-highest",
+          "note": "Tooltips, top layer"
+        }
+      },
+      "light": {
+        "level-0": "#ffffff",
+        "level-1": "#f4faf1",
+        "level-2": "#edf3ea",
+        "level-3": "#e6ede3",
+        "level-4": "#dfe7dc",
+        "level-5": "#d8e1d5"
+      },
+      "dark": {
+        "level-0": "#1a1c19",
+        "level-1": "#222520",
+        "level-2": "#2b2d29",
+        "level-3": "#333630",
+        "level-4": "#3b3e38",
+        "level-5": "#434641"
+      }
+    },
+    "motion": {
+      "_status": "COMPLETE \u2014 2026-05-05",
+      "_note": "Motion tokens for transitions and animations throughout the AD Design System.",
+      "duration": {
+        "instant": "0ms",
+        "fast": "100ms",
+        "standard": "200ms",
+        "moderate": "300ms",
+        "slow": "400ms",
+        "extra_slow": "500ms"
+      },
+      "easing": {
+        "standard": "cubic-bezier(0.2, 0, 0, 1.0)",
+        "decelerate": "cubic-bezier(0, 0, 0, 1)",
+        "accelerate": "cubic-bezier(0.3, 0, 1, 1)",
+        "linear": "cubic-bezier(0, 0, 1, 1)"
+      },
+      "component_defaults": {
+        "state_layer": "background 120ms standard",
+        "color_transition": "color 120ms standard",
+        "expand_collapse": "max-height 220ms standard",
+        "chevron_rotate": "transform 220ms standard",
+        "tab_indicator": "left 200ms decelerate, width 200ms decelerate",
+        "dialog_enter": "opacity 200ms decelerate, transform 200ms decelerate",
+        "snackbar_enter": "transform 300ms decelerate",
+        "tooltip_enter": "opacity 100ms fast",
+        "fab_enter": "transform 300ms decelerate, opacity 200ms standard",
+        "slider_thumb_press": "transform 120ms standard"
+      }
+    }
+  },
+  "logo": {
+    "_note": "AD logo provided by Dan \u2014 2026-05-03. Two-block lockup: left = green field + black mountain mark, right = black field + green AD wordmark.",
+    "file": "AD_logo.png (uploaded by Dan)",
+    "color_confirmation": {
+      "primary_green": "#4c6842 \u2014 confirmed match to logo green field and AD wordmark color",
+      "logo_black": "#0d0d0d \u2014 near-black used in logo mark and right field background"
+    },
+    "logo_mark": {
+      "geometry": "Three overlapping mountain peaks \u2014 angular, geometric, no curves. Largest peak center-right, two diagonal layered peaks left. Creates depth through overlap.",
+      "style": "Flat, high-contrast. Zero border radius. Sharp apex on every peak.",
+      "implication_for_icons": "All system icons should use angular geometry, sharp corners, no rounded terminals. Line weight: 1.5\u20132px stroke. Style mirrors the mountain layers."
+    },
+    "wordmark": {
+      "font_style": "Bold geometric sans-serif with slightly rounded terminals on the D. NOT the same as Arvo \u2014 this is a custom/licensed display sans. Do not replicate in body copy.",
+      "treatment": "Uppercase, wide tracking, strong weight",
+      "implication": "Arvo chosen for design system headlines coordinates well \u2014 both are bold, structural, authoritative."
+    },
+    "logo_lockup": {
+      "structure": "Two equal square blocks side by side. Left: primary green bg + black mark. Right: near-black bg + primary green wordmark.",
+      "color_swap": "Mark and wordmark swap fg/bg \u2014 this is the core brand duality: green world / dark world.",
+      "implication_for_dark_mode": "Dark theme surfaces use logo naturally. Light theme should always show the full two-block lockup or the wordmark-only version on white."
+    },
+    "design_motif": {
+      "mountain_layers": "The layered peak geometry is a strong motif \u2014 carry it into dividers, hero shapes, section transitions, and illustration style.",
+      "two_block_grid": "The logo's left/right block split can inform card layout, stat display grids, and nav bar color breaks.",
+      "angular_language": "Every element of the logo is sharp-edged \u2014 confirms 4px radius as correct. The logo would look wrong next to pill-shaped buttons."
+    },
+    "usage_rules": {
+      "on_light": "Full lockup or green-on-white wordmark only",
+      "on_dark": "Full lockup or white-on-dark wordmark",
+      "on_primary": "White mark + white AD text (reverse)",
+      "clear_space": "Minimum clear space = height of the mountain mark on all sides",
+      "minimum_size": "32px height minimum for digital"
+    },
+    "svg_files": {
+      "white": "AD_logo_white.svg \u2014 use on green/dark backgrounds (header, app bar, dark hero)",
+      "green": "AD_logo_green.svg \u2014 use on light/white backgrounds",
+      "viewBox": "0 0 432 288",
+      "aspect_ratio": "1.5:1 \u2014 use width=120 height=80 for standard size",
+      "inline_instruction": "Always embed SVG inline using the actual paths from the file. Never approximate with shapes or text.",
+      "standard_inline_usage": "Copy the <polygon> and <path> elements from the file verbatim. Set width=120 height=80 on the <svg> wrapper."
+    }
+  },
+  "outdoor_extension": {
+    "_note": "Drawn from the canyon/mountain photography on adhq.com. These are supplemental surface and accent tokens that deepen the outdoor character without breaking the M3 system.",
+    "_approved": "pending Dan review",
+    "earth": {
+      "canyon_warm": "#c4602a",
+      "canyon_mid": "#8b3d18",
+      "canyon_deep": "#5c2710",
+      "sandstone_light": "#f0e0cc",
+      "sandstone_mid": "#d4b896",
+      "sage_mist": "#e8ede4",
+      "pine_shadow": "#2a3d28",
+      "sky_haze": "#dce8f0"
+    },
+    "surface_tokens": {
+      "surface_outdoor_warm": "#f5f0e8",
+      "surface_outdoor_cool": "#edf2ed",
+      "surface_earth_tint": "#f2ebe0",
+      "_usage": "Use outdoor_warm for hero section backgrounds, earth_tint for feature cards that need a nature feel. Do not use for data-dense UI panels \u2014 keep those on neutral surface."
+    },
+    "photography_palette": {
+      "_note": "Colors extracted from the AD canyon hero image. Use to validate image choices and illustration palette.",
+      "rock_shadow": "#3d2b1e",
+      "rock_mid": "#7a5238",
+      "rock_highlight": "#c49070",
+      "foliage_deep": "#2d4a2a",
+      "foliage_mid": "#4c7048",
+      "sky_warm": "#d4a060",
+      "sky_light": "#f0d4a8"
+    }
+  },
+  "components": {
+    "_status": "NEXT TO BUILD \u2014 component tokens will be added here",
+    "button_filled": {
+      "_status": "pending"
+    },
+    "button_outlined": {
+      "_status": "pending"
+    },
+    "button_text": {
+      "_status": "pending"
+    },
+    "button_tonal": {
+      "_status": "pending"
+    },
+    "card_elevated": {
+      "_status": "pending"
+    },
+    "card_filled": {
+      "_status": "pending"
+    },
+    "card_outlined": {
+      "_status": "pending"
+    },
+    "chip_filter": {
+      "_status": "pending"
+    },
+    "chip_input": {
+      "_status": "pending"
+    },
+    "dialog": {
+      "_status": "COMPLETE \u2014 2026-05-04",
+      "_note": "4 variants: Basic, With Icon, Destructive Confirmation, Full-Screen. All Inter. 12px radius for modal dialogs, 4px for full-screen (matches page chrome).",
+      "shared": {
+        "max_width": "560px",
+        "padding_sides": "24px",
+        "padding_top": "20px",
+        "padding_actions_bottom": "20px",
+        "headline_font": "Inter 600 22px",
+        "body_font": "Inter 400 14px / line-height 1.6",
+        "action_height": "40px",
+        "action_font": "Inter 500 14px",
+        "action_radius": "4px",
+        "icon_size": "48px circle"
+      },
+      "basic": {
+        "radius": "12px",
+        "light": {
+          "container": "#ffffff",
+          "headline": "#191c17",
+          "body": "#414941",
+          "scrim": "rgba(0,0,0,0.40)",
+          "shadow": "0 4px 8px rgba(0,0,0,0.15), 0 8px 24px rgba(0,0,0,0.10)"
+        },
+        "dark": {
+          "container": "#282b25",
+          "headline": "#e2e5db",
+          "body": "#c1c9bc",
+          "scrim": "rgba(0,0,0,0.60)",
+          "shadow": "0 4px 12px rgba(0,0,0,0.5), 0 8px 32px rgba(0,0,0,0.4)"
+        },
+        "actions": {
+          "confirm": "filled button \u2014 primary color",
+          "dismiss": "text button \u2014 primary color, no bg",
+          "destructive_confirm": "filled button \u2014 error color (#B3261E light / #F2B8B5 dark)"
+        }
+      },
+      "with_icon": {
+        "radius": "12px",
+        "icon_container_info": {
+          "light": "#cde3c4",
+          "dark": "#2f5229"
+        },
+        "icon_container_warn": {
+          "light": "#F9DEDC",
+          "dark": "#8C1D18"
+        },
+        "icon_stroke_info": {
+          "light": "#4c6842",
+          "dark": "#b3d0a9"
+        },
+        "icon_stroke_warn": {
+          "light": "#B3261E",
+          "dark": "#F2B8B5"
+        },
+        "headline_align": "center"
+      },
+      "fullscreen": {
+        "radius": "4px",
+        "top_bar_height": "56px",
+        "light": {
+          "container": "#ffffff",
+          "top_bar": "#ffffff",
+          "border_bottom": "#dde5db"
+        },
+        "dark": {
+          "container": "#282b25",
+          "top_bar": "#282b25",
+          "border_bottom": "#414941"
+        },
+        "title_font": "Inter 600 18px",
+        "close_icon": "24px \u00d7 \u2014 top left",
+        "confirm_action": "text button \u2014 top right"
+      }
+    },
+    "divider": {
+      "_status": "pending"
+    },
+    "fab": {
+      "_status": "COMPLETE \u2014 2026-05-04",
+      "_note": "4 colour variants \u00d7 4 sizes. All icons 1.5px stroke, no rounded terminals (AD geometry). One FAB per view maximum.",
+      "sizes": {
+        "small": {
+          "width": "40px",
+          "height": "40px",
+          "radius": "4px",
+          "icon": "18px"
+        },
+        "standard": {
+          "width": "56px",
+          "height": "56px",
+          "radius": "4px",
+          "icon": "24px"
+        },
+        "large": {
+          "width": "96px",
+          "height": "96px",
+          "radius": "8px",
+          "icon": "36px"
+        },
+        "extended": {
+          "height": "56px",
+          "radius": "4px",
+          "padding": "0 20px",
+          "icon": "20px",
+          "label": "Inter 500 14px",
+          "gap": "8px"
+        }
+      },
+      "variants": {
+        "primary": {
+          "light": {
+            "container": "#cde3c4",
+            "on_container": "#0d1a0b"
+          },
+          "dark": {
+            "container": "#2f5229",
+            "on_container": "#cde3c4"
+          }
+        },
+        "secondary": {
+          "light": {
+            "container": "#d1dadd",
+            "on_container": "#121517"
+          },
+          "dark": {
+            "container": "#373f43",
+            "on_container": "#d1dadd"
+          }
+        },
+        "tertiary": {
+          "light": {
+            "container": "#fae3bc",
+            "on_container": "#231500"
+          },
+          "dark": {
+            "container": "#6d4400",
+            "on_container": "#fae3bc"
+          },
+          "note": "Amber \u2014 highest-energy CTA"
+        },
+        "surface": {
+          "light": {
+            "container": "#ffffff",
+            "on_container": "#4c6842",
+            "border": "1px solid #c1c9bc"
+          },
+          "dark": {
+            "container": "#1e211b",
+            "on_container": "#b3d0a9",
+            "border": "1px solid #414941"
+          }
+        }
+      },
+      "states": {
+        "hover": "on_container 8% overlay",
+        "pressed": "on_container 12% overlay",
+        "focused": {
+          "light": "2px solid #4c6842",
+          "dark": "2px solid #b3d0a9"
+        },
+        "disabled": "container 12% on_surface / icon 38% on_surface / no shadow"
+      },
+      "elevation": "0 2px 4px rgba(0,0,0,.15) + 0 4px 8px rgba(0,0,0,.10) \u2014 Level 2"
+    },
+    "icon_button": {
+      "_status": "pending"
+    },
+    "list": {
+      "_status": "pending"
+    },
+    "menu": {
+      "_status": "pending"
+    },
+    "navigation_bar": {
+      "_status": "pending"
+    },
+    "navigation_drawer": {
+      "_status": "pending"
+    },
+    "progress_indicator": {
+      "_status": "pending"
+    },
+    "search_bar": {
+      "_status": "pending"
+    },
+    "snackbar": {
+      "_status": "pending"
+    },
+    "switch": {
+      "_status": "pending"
+    },
+    "text_field_filled": {
+      "_status": "pending"
+    },
+    "text_field_outlined": {
+      "_status": "pending"
+    },
+    "tooltip": {
+      "_status": "pending"
+    },
+    "top_app_bar": {
+      "_status": "pending"
+    },
+    "button": {
+      "_status": "COMPLETE \u2014 2026-05-03",
+      "_spec": {
+        "height": "40px",
+        "min_width": "64px",
+        "padding_horizontal": "24px",
+        "padding_horizontal_text": "12px",
+        "border_radius": "4px (xs \u2014 angular, AD brand)",
+        "border_width": "1px (outlined only)",
+        "focus_ring": "2px offset 2px",
+        "icon_size": "18px",
+        "gap_icon_label": "8px",
+        "label_style": "Inter, 13px, weight 500, uppercase, letter-spacing 0.8px"
+      },
+      "filled": {
+        "_note": "Highest emphasis. Primary action. No border.",
+        "light": {
+          "default": {
+            "container": "#4c6842",
+            "label": "#ffffff",
+            "border": "none"
+          },
+          "hover": {
+            "container": "#567549",
+            "label": "#ffffff",
+            "border": "none",
+            "state_layer": "white 8% over container"
+          },
+          "pressed": {
+            "container": "#5e7f50",
+            "label": "#ffffff",
+            "border": "none",
+            "state_layer": "white 12% over container"
+          },
+          "focused": {
+            "container": "#5e7f50",
+            "label": "#ffffff",
+            "border": "none",
+            "focus_ring": "2px solid #4c6842",
+            "state_layer": "white 12% over container"
+          },
+          "disabled": {
+            "container": "rgba(25,28,23,0.12)",
+            "label": "rgba(25,28,23,0.38)",
+            "border": "none"
+          }
+        },
+        "dark": {
+          "default": {
+            "container": "#b3d0a9",
+            "label": "#1f3a1a",
+            "border": "none"
+          },
+          "hover": {
+            "container": "#a8c69e",
+            "label": "#1f3a1a",
+            "border": "none",
+            "state_layer": "on-primary 8% over container"
+          },
+          "pressed": {
+            "container": "#a0be96",
+            "label": "#1f3a1a",
+            "border": "none",
+            "state_layer": "on-primary 12% over container"
+          },
+          "focused": {
+            "container": "#a0be96",
+            "label": "#1f3a1a",
+            "border": "none",
+            "focus_ring": "2px solid #b3d0a9"
+          },
+          "disabled": {
+            "container": "rgba(226,229,219,0.12)",
+            "label": "rgba(226,229,219,0.38)",
+            "border": "none"
+          }
+        }
+      },
+      "outlined": {
+        "_note": "Medium emphasis. Secondary action. 1px border, transparent container.",
+        "light": {
+          "default": {
+            "container": "transparent",
+            "label": "#4c6842",
+            "border": "1px solid #717a6e"
+          },
+          "hover": {
+            "container": "rgba(76,104,66,0.08)",
+            "label": "#4c6842",
+            "border": "1px solid #717a6e",
+            "state_layer": "primary 8% over container"
+          },
+          "pressed": {
+            "container": "rgba(76,104,66,0.12)",
+            "label": "#4c6842",
+            "border": "1px solid #717a6e",
+            "state_layer": "primary 12% over container"
+          },
+          "focused": {
+            "container": "rgba(76,104,66,0.12)",
+            "label": "#4c6842",
+            "border": "1px solid #4c6842",
+            "focus_ring": "2px solid #4c6842"
+          },
+          "disabled": {
+            "container": "transparent",
+            "label": "rgba(25,28,23,0.38)",
+            "border": "1px solid rgba(25,28,23,0.12)"
+          }
+        },
+        "dark": {
+          "default": {
+            "container": "transparent",
+            "label": "#b3d0a9",
+            "border": "1px solid #8b938a"
+          },
+          "hover": {
+            "container": "rgba(179,208,169,0.08)",
+            "label": "#b3d0a9",
+            "border": "1px solid #8b938a"
+          },
+          "pressed": {
+            "container": "rgba(179,208,169,0.12)",
+            "label": "#b3d0a9",
+            "border": "1px solid #8b938a"
+          },
+          "focused": {
+            "container": "rgba(179,208,169,0.12)",
+            "label": "#b3d0a9",
+            "border": "1px solid #b3d0a9",
+            "focus_ring": "2px solid #b3d0a9"
+          },
+          "disabled": {
+            "container": "transparent",
+            "label": "rgba(226,229,219,0.38)",
+            "border": "1px solid rgba(226,229,219,0.12)"
+          }
+        }
+      },
+      "tonal": {
+        "_note": "Medium emphasis. Uses primary-container. No border. Good for secondary CTAs.",
+        "light": {
+          "default": {
+            "container": "#cde3c4",
+            "label": "#0d1a0b",
+            "border": "none"
+          },
+          "hover": {
+            "container": "#c2d9b9",
+            "label": "#0d1a0b",
+            "border": "none",
+            "state_layer": "on-primary-container 8% over container"
+          },
+          "pressed": {
+            "container": "#bbd2b2",
+            "label": "#0d1a0b",
+            "border": "none",
+            "state_layer": "on-primary-container 12% over container"
+          },
+          "focused": {
+            "container": "#bbd2b2",
+            "label": "#0d1a0b",
+            "border": "none",
+            "focus_ring": "2px solid #4c6842"
+          },
+          "disabled": {
+            "container": "rgba(25,28,23,0.12)",
+            "label": "rgba(25,28,23,0.38)",
+            "border": "none"
+          }
+        },
+        "dark": {
+          "default": {
+            "container": "#2f5229",
+            "label": "#cde3c4",
+            "border": "none"
+          },
+          "hover": {
+            "container": "#385e32",
+            "label": "#cde3c4",
+            "border": "none"
+          },
+          "pressed": {
+            "container": "#3e6537",
+            "label": "#cde3c4",
+            "border": "none"
+          },
+          "focused": {
+            "container": "#3e653f",
+            "label": "#cde3c4",
+            "border": "none",
+            "focus_ring": "2px solid #b3d0a9"
+          },
+          "disabled": {
+            "container": "rgba(226,229,219,0.12)",
+            "label": "rgba(226,229,219,0.38)",
+            "border": "none"
+          }
+        }
+      },
+      "text": {
+        "_note": "Lowest emphasis. Inline actions, tertiary flows. No border, no container. Reduced horizontal padding.",
+        "_spec_override": {
+          "padding_horizontal": "12px"
+        },
+        "light": {
+          "default": {
+            "container": "transparent",
+            "label": "#4c6842",
+            "border": "none"
+          },
+          "hover": {
+            "container": "rgba(76,104,66,0.08)",
+            "label": "#4c6842",
+            "border": "none"
+          },
+          "pressed": {
+            "container": "rgba(76,104,66,0.12)",
+            "label": "#4c6842",
+            "border": "none"
+          },
+          "focused": {
+            "container": "rgba(76,104,66,0.12)",
+            "label": "#4c6842",
+            "border": "none",
+            "focus_ring": "2px solid #4c6842"
+          },
+          "disabled": {
+            "container": "transparent",
+            "label": "rgba(25,28,23,0.38)",
+            "border": "none"
+          }
+        },
+        "dark": {
+          "default": {
+            "container": "transparent",
+            "label": "#b3d0a9",
+            "border": "none"
+          },
+          "hover": {
+            "container": "rgba(179,208,169,0.08)",
+            "label": "#b3d0a9",
+            "border": "none"
+          },
+          "pressed": {
+            "container": "rgba(179,208,169,0.12)",
+            "label": "#b3d0a9",
+            "border": "none"
+          },
+          "focused": {
+            "container": "rgba(179,208,169,0.12)",
+            "label": "#b3d0a9",
+            "border": "none",
+            "focus_ring": "2px solid #b3d0a9"
+          },
+          "disabled": {
+            "container": "transparent",
+            "label": "rgba(226,229,219,0.38)",
+            "border": "none"
+          }
+        }
+      },
+      "toggle_on_green_header": {
+        "_problem_source": "Host interface applies its own CSS to <button> elements at high specificity, neutralising any background-color set in widget <style> blocks. Using a styled <div> bypasses this entirely.",
+        "container": "#4a5d40",
+        "label": "#000000",
+        "border": "1px solid rgba(0,0,0,0.45)",
+        "element": "div (NOT button)",
+        "approved": "APPROVED 2026-05-04",
+        "_note": "Confirmed by Dan 2026-05-04. Subtle darker green on #4c6842 header. Black text, dark border."
+      }
+    },
+    "card": {
+      "_status": "COMPLETE \u2014 2026-05-03",
+      "_spec": {
+        "border_radius": "8px (sm)",
+        "border_width": "1px on all variants",
+        "padding": "16px (sp-4)",
+        "padding_actions": "8px 16px",
+        "gap_internal": "8px between header, content, actions",
+        "min_height": "content-driven \u2014 no fixed height",
+        "header_title": "Inter 18px/600 (title_large)",
+        "header_subtitle": "Inter 14px/400 (body_medium) on-surface-variant color",
+        "body_text": "Inter 16px/400 (body_large)",
+        "actions_area": "button row \u2014 8px gap \u2014 align bottom",
+        "focus_ring": "2px solid primary, offset 2px",
+        "elevation_elevated_default": "Level 1 \u2014 0 1px 2px rgba(0,0,0,0.3), 0 1px 3px 1px rgba(0,0,0,0.15)",
+        "elevation_elevated_hover": "Level 2 \u2014 0 1px 2px rgba(0,0,0,0.3), 0 2px 6px 2px rgba(0,0,0,0.15)",
+        "elevation_elevated_dragged": "Level 3 \u2014 0 4px 8px 3px rgba(0,0,0,0.15), 0 1px 3px rgba(0,0,0,0.3)"
+      },
+      "elevated": {
+        "_note": "Highest visual weight. Use for primary content \u2014 member companies, featured suppliers. Shadow lifts on hover.",
+        "light": {
+          "default": {
+            "container": "#ffffff",
+            "border": "1px solid #c1c9bc",
+            "shadow": "0 1px 2px rgba(0,0,0,0.3), 0 1px 3px 1px rgba(0,0,0,0.15)",
+            "title": "#191c17",
+            "subtitle": "#414941"
+          },
+          "hover": {
+            "container": "#f4f8f1",
+            "border": "1px solid #c1c9bc",
+            "shadow": "0 1px 2px rgba(0,0,0,0.3), 0 2px 6px 2px rgba(0,0,0,0.15)",
+            "state_layer": "primary 8% tonal tint",
+            "title": "#191c17",
+            "subtitle": "#414941"
+          },
+          "pressed": {
+            "container": "#f0f5ed",
+            "border": "1px solid #c1c9bc",
+            "shadow": "0 1px 2px rgba(0,0,0,0.3), 0 1px 3px 1px rgba(0,0,0,0.15)",
+            "state_layer": "primary 12% tint",
+            "title": "#191c17",
+            "subtitle": "#414941"
+          },
+          "focused": {
+            "container": "#f0f5ed",
+            "border": "1px solid #c1c9bc",
+            "shadow": "0 1px 2px rgba(0,0,0,0.3), 0 1px 3px 1px rgba(0,0,0,0.15)",
+            "focus_ring": "2px solid #4c6842 offset 2px",
+            "title": "#191c17",
+            "subtitle": "#414941"
+          },
+          "disabled": {
+            "container": "rgba(25,28,23,0.12)",
+            "border": "none",
+            "shadow": "none",
+            "title": "rgba(25,28,23,0.38)",
+            "subtitle": "rgba(25,28,23,0.38)"
+          }
+        },
+        "dark": {
+          "default": {
+            "container": "#282b25",
+            "border": "1px solid #414941",
+            "shadow": "0 1px 2px rgba(0,0,0,0.6), 0 1px 3px 1px rgba(0,0,0,0.4)",
+            "title": "#e2e5db",
+            "subtitle": "#c1c9bc"
+          },
+          "hover": {
+            "container": "#2f3328",
+            "border": "1px solid #414941",
+            "shadow": "0 1px 2px rgba(0,0,0,0.6), 0 2px 6px 2px rgba(0,0,0,0.4)",
+            "state_layer": "primary 8% tint",
+            "title": "#e2e5db",
+            "subtitle": "#c1c9bc"
+          },
+          "pressed": {
+            "container": "#343830",
+            "border": "1px solid #414941",
+            "shadow": "0 1px 2px rgba(0,0,0,0.6), 0 1px 3px 1px rgba(0,0,0,0.4)",
+            "title": "#e2e5db",
+            "subtitle": "#c1c9bc"
+          },
+          "focused": {
+            "container": "#343830",
+            "border": "1px solid #414941",
+            "shadow": "0 1px 2px rgba(0,0,0,0.6), 0 1px 3px 1px rgba(0,0,0,0.4)",
+            "focus_ring": "2px solid #b3d0a9 offset 2px",
+            "title": "#e2e5db",
+            "subtitle": "#c1c9bc"
+          },
+          "disabled": {
+            "container": "rgba(226,229,219,0.12)",
+            "border": "none",
+            "shadow": "none",
+            "title": "rgba(226,229,219,0.38)",
+            "subtitle": "rgba(226,229,219,0.38)"
+          }
+        }
+      },
+      "filled": {
+        "_note": "Medium weight. Use for secondary content lists, industry tiles, grouped items. Warm surface-outdoor-warm variant available for outdoor-themed cards.",
+        "light": {
+          "default": {
+            "container": "#eceee7",
+            "border": "1px solid #c1c9bc",
+            "shadow": "none",
+            "title": "#191c17",
+            "subtitle": "#414941"
+          },
+          "hover": {
+            "container": "#e5e8df",
+            "border": "1px solid #c1c9bc",
+            "shadow": "none",
+            "state_layer": "on-surface 8% over container"
+          },
+          "pressed": {
+            "container": "#e0e3da",
+            "border": "1px solid #c1c9bc",
+            "shadow": "none",
+            "state_layer": "on-surface 12% over container"
+          },
+          "focused": {
+            "container": "#e0e3da",
+            "border": "1px solid #c1c9bc",
+            "shadow": "none",
+            "focus_ring": "2px solid #4c6842 offset 2px"
+          },
+          "disabled": {
+            "container": "rgba(25,28,23,0.12)",
+            "border": "none",
+            "shadow": "none",
+            "title": "rgba(25,28,23,0.38)",
+            "subtitle": "rgba(25,28,23,0.38)"
+          },
+          "variant_outdoor_warm": {
+            "container": "#f5f0e8",
+            "border": "1px solid #d4b896",
+            "_note": "Use for outdoor/terrain themed content sections"
+          }
+        },
+        "dark": {
+          "default": {
+            "container": "#33362f",
+            "border": "1px solid #414941",
+            "shadow": "none",
+            "title": "#e2e5db",
+            "subtitle": "#c1c9bc"
+          },
+          "hover": {
+            "container": "#393d35",
+            "border": "1px solid #414941",
+            "shadow": "none"
+          },
+          "pressed": {
+            "container": "#3e423a",
+            "border": "1px solid #414941",
+            "shadow": "none"
+          },
+          "focused": {
+            "container": "#3e423a",
+            "border": "1px solid #414941",
+            "shadow": "none",
+            "focus_ring": "2px solid #b3d0a9 offset 2px"
+          },
+          "disabled": {
+            "container": "rgba(226,229,219,0.12)",
+            "border": "none",
+            "shadow": "none",
+            "title": "rgba(226,229,219,0.38)",
+            "subtitle": "rgba(226,229,219,0.38)"
+          }
+        }
+      },
+      "outlined": {
+        "_note": "Lowest container weight. Strong 1px outline defines the boundary. Use for selectable items, filters, data rows, member lists.",
+        "light": {
+          "default": {
+            "container": "#f8faf5",
+            "border": "1px solid #717a6e",
+            "shadow": "none",
+            "title": "#191c17",
+            "subtitle": "#414941"
+          },
+          "hover": {
+            "container": "rgba(76,104,66,0.08)",
+            "border": "1px solid #717a6e",
+            "shadow": "none",
+            "state_layer": "primary 8%"
+          },
+          "pressed": {
+            "container": "rgba(76,104,66,0.12)",
+            "border": "1px solid #717a6e",
+            "shadow": "none"
+          },
+          "focused": {
+            "container": "rgba(76,104,66,0.12)",
+            "border": "1px solid #4c6842",
+            "shadow": "none",
+            "focus_ring": "2px solid #4c6842 offset 2px"
+          },
+          "selected": {
+            "container": "#cde3c4",
+            "border": "1px solid #4c6842",
+            "shadow": "none",
+            "_note": "Selected state for selectable outlined cards"
+          },
+          "disabled": {
+            "container": "transparent",
+            "border": "1px solid rgba(25,28,23,0.12)",
+            "shadow": "none",
+            "title": "rgba(25,28,23,0.38)",
+            "subtitle": "rgba(25,28,23,0.38)"
+          }
+        },
+        "dark": {
+          "default": {
+            "container": "#191c17",
+            "border": "1px solid #8b938a",
+            "shadow": "none",
+            "title": "#e2e5db",
+            "subtitle": "#c1c9bc"
+          },
+          "hover": {
+            "container": "rgba(179,208,169,0.08)",
+            "border": "1px solid #8b938a",
+            "shadow": "none"
+          },
+          "pressed": {
+            "container": "rgba(179,208,169,0.12)",
+            "border": "1px solid #8b938a",
+            "shadow": "none"
+          },
+          "focused": {
+            "container": "rgba(179,208,169,0.12)",
+            "border": "1px solid #b3d0a9",
+            "shadow": "none",
+            "focus_ring": "2px solid #b3d0a9 offset 2px"
+          },
+          "selected": {
+            "container": "#2f5229",
+            "border": "1px solid #b3d0a9",
+            "shadow": "none"
+          },
+          "disabled": {
+            "container": "transparent",
+            "border": "1px solid rgba(226,229,219,0.12)",
+            "shadow": "none",
+            "title": "rgba(226,229,219,0.38)",
+            "subtitle": "rgba(226,229,219,0.38)"
+          }
+        }
+      }
+    },
+    "input": {
+      "_status": "COMPLETE \u2014 APPROVED 2026-05-03",
+      "_note": "M3 Text Field \u2014 Outlined and Filled variants. All Inter (never Arvo). 56px height. 4px radius outlined / 4-4-0-0px filled. 1px default border, 2px focused/error.",
+      "outlined": {
+        "light": {
+          "default": {
+            "container": "transparent",
+            "border": "1px solid #c1c9bc",
+            "label_resting": "#414941",
+            "label_resting_size": "16px",
+            "supporting": "#414941"
+          },
+          "focused": {
+            "container": "transparent",
+            "border": "2px solid #4c6842",
+            "label_floating": "#4c6842",
+            "label_floating_size": "12px",
+            "supporting": "#414941"
+          },
+          "populated": {
+            "container": "transparent",
+            "border": "1px solid #c1c9bc",
+            "label_floating": "#414941",
+            "label_floating_size": "12px",
+            "input_text": "#191c17"
+          },
+          "error": {
+            "container": "transparent",
+            "border": "2px solid #B3261E",
+            "label_floating": "#B3261E",
+            "label_floating_size": "12px",
+            "input_text": "#191c17",
+            "supporting_error": "#B3261E",
+            "trailing_icon": "#B3261E"
+          },
+          "disabled": {
+            "container": "transparent",
+            "border": "1px solid rgba(25,28,23,0.38)",
+            "label": "rgba(25,28,23,0.38)",
+            "input_text": "rgba(25,28,23,0.38)"
+          }
+        },
+        "dark": {
+          "default": {
+            "container": "transparent",
+            "border": "1px solid #414941",
+            "label_resting": "#c1c9bc",
+            "label_resting_size": "16px",
+            "supporting": "#c1c9bc"
+          },
+          "focused": {
+            "container": "transparent",
+            "border": "2px solid #b3d0a9",
+            "label_floating": "#b3d0a9",
+            "label_floating_size": "12px",
+            "supporting": "#c1c9bc"
+          },
+          "populated": {
+            "container": "transparent",
+            "border": "1px solid #414941",
+            "label_floating": "#c1c9bc",
+            "label_floating_size": "12px",
+            "input_text": "#e2e5db"
+          },
+          "error": {
+            "container": "transparent",
+            "border": "2px solid #F2B8B5",
+            "label_floating": "#F2B8B5",
+            "label_floating_size": "12px",
+            "input_text": "#e2e5db",
+            "supporting_error": "#F2B8B5",
+            "trailing_icon": "#F2B8B5"
+          },
+          "disabled": {
+            "container": "transparent",
+            "border": "1px solid rgba(226,229,219,0.38)",
+            "label": "rgba(226,229,219,0.38)",
+            "input_text": "rgba(226,229,219,0.38)"
+          }
+        }
+      },
+      "filled": {
+        "light": {
+          "default": {
+            "container": "#e1e4dc",
+            "border_bottom": "1px solid #717a6e",
+            "label_resting": "#414941",
+            "label_resting_size": "16px",
+            "supporting": "#414941",
+            "radius": "4px 4px 0 0"
+          },
+          "focused": {
+            "container": "#e1e4dc",
+            "border_bottom": "2px solid #4c6842",
+            "label_floating": "#4c6842",
+            "label_floating_size": "12px",
+            "supporting": "#414941"
+          },
+          "populated": {
+            "container": "#e1e4dc",
+            "border_bottom": "1px solid #717a6e",
+            "label_floating": "#414941",
+            "label_floating_size": "12px",
+            "input_text": "#191c17"
+          },
+          "error": {
+            "container": "#e1e4dc",
+            "border_bottom": "2px solid #B3261E",
+            "label_floating": "#B3261E",
+            "label_floating_size": "12px",
+            "input_text": "#191c17",
+            "supporting_error": "#B3261E",
+            "trailing_icon": "#B3261E"
+          },
+          "disabled": {
+            "container": "rgba(25,28,23,0.04)",
+            "border_bottom": "1px solid rgba(25,28,23,0.38)",
+            "label": "rgba(25,28,23,0.38)",
+            "input_text": "rgba(25,28,23,0.38)"
+          }
+        },
+        "dark": {
+          "default": {
+            "container": "#33362f",
+            "border_bottom": "1px solid #8b938a",
+            "label_resting": "#c1c9bc",
+            "label_resting_size": "16px",
+            "supporting": "#c1c9bc",
+            "radius": "4px 4px 0 0"
+          },
+          "focused": {
+            "container": "#33362f",
+            "border_bottom": "2px solid #b3d0a9",
+            "label_floating": "#b3d0a9",
+            "label_floating_size": "12px",
+            "supporting": "#c1c9bc"
+          },
+          "populated": {
+            "container": "#33362f",
+            "border_bottom": "1px solid #8b938a",
+            "label_floating": "#c1c9bc",
+            "label_floating_size": "12px",
+            "input_text": "#e2e5db"
+          },
+          "error": {
+            "container": "#33362f",
+            "border_bottom": "2px solid #F2B8B5",
+            "label_floating": "#F2B8B5",
+            "label_floating_size": "12px",
+            "input_text": "#e2e5db",
+            "supporting_error": "#F2B8B5",
+            "trailing_icon": "#F2B8B5"
+          },
+          "disabled": {
+            "container": "rgba(226,229,219,0.04)",
+            "border_bottom": "1px solid rgba(226,229,219,0.38)",
+            "label": "rgba(226,229,219,0.38)",
+            "input_text": "rgba(226,229,219,0.38)"
+          }
+        }
+      },
+      "shared": {
+        "height": "56px",
+        "radius_outlined": "4px",
+        "radius_filled": "4px 4px 0 0",
+        "border_width_default": "1px",
+        "border_width_focused": "2px",
+        "border_width_error": "2px",
+        "label_size_resting": "16px (body_large)",
+        "label_size_floating": "12px (label_small)",
+        "supporting_size": "12px",
+        "input_text_size": "16px",
+        "font": "Inter \u2014 all roles (never Arvo)"
+      }
+    },
+    "navigation": {
+      "_status": "COMPLETE \u2014 2026-05-04",
+      "_note": "Top App Bar (small 64px + medium) and Navigation Drawer. All Inter \u2014 never Arvo. Logo uses primary token color in drawer (green light / light-green dark).",
+      "top_app_bar": {
+        "small": {
+          "height": "64px",
+          "title_size": "22px",
+          "title_weight": "500",
+          "title_font": "Inter (title_large)",
+          "light": {
+            "container": "#f8faf5",
+            "on_container": "#191c17",
+            "icon_stroke": "#191c17"
+          },
+          "dark": {
+            "container": "#1e211b",
+            "on_container": "#e2e5db",
+            "icon_stroke": "#e2e5db"
+          },
+          "container_light": "primary (#4c6842) \u2014 green bar",
+          "container_dark": "primary_container (#2f5229)",
+          "logo": "white SVG \u2014 160px wide x 107px tall",
+          "logo_note": "White logo on primary green bar. Overflows bar height intentionally \u2014 anchored vertically to bar center.",
+          "logo_width": "120px",
+          "logo_height": "80px"
+        },
+        "medium": {
+          "height": "112px",
+          "title_size": "28px",
+          "title_weight": "500",
+          "title_font": "Inter (headline_medium)",
+          "light": {
+            "container": "#f8faf5",
+            "on_container": "#191c17"
+          },
+          "dark": {
+            "container": "#1e211b",
+            "on_container": "#e2e5db"
+          }
+        },
+        "shared": {
+          "icon_size": "24px",
+          "icon_touch_target": "48px",
+          "icon_stroke_width": "1.5px",
+          "border_bottom": "1px solid outline_variant",
+          "state_hover": "primary 8% overlay",
+          "state_pressed": "primary 12% overlay"
+        }
+      },
+      "drawer": {
+        "width_standard": "240px",
+        "width_modal_mobile": "360px",
+        "light": {
+          "container": "#f4f8f1"
+        },
+        "dark": {
+          "container": "#1e211b"
+        },
+        "header": {
+          "logo_color_light": "#4c6842 (primary)",
+          "logo_color_dark": "#b3d0a9 (primary dark)",
+          "logo_width": "120px",
+          "brand_name_font": "Inter 500 13px",
+          "brand_sub_font": "Inter 400 11px",
+          "logo_height": "80px",
+          "layout": "column \u2014 logo stacked above brand name + subtext",
+          "logo_color": "primary token (green light / light-green dark)"
+        },
+        "nav_item": {
+          "height": "48px",
+          "radius": "4px",
+          "label_size": "14px",
+          "label_weight_active": "600",
+          "label_weight_inactive": "500",
+          "font": "Inter",
+          "icon_size": "20px",
+          "icon_stroke": "1.5px",
+          "active": {
+            "light": {
+              "container": "#cde3c4",
+              "label": "#0d1a0b",
+              "icon": "#0d1a0b"
+            },
+            "dark": {
+              "container": "#2f5229",
+              "label": "#cde3c4",
+              "icon": "#cde3c4"
+            }
+          },
+          "inactive": {
+            "light": {
+              "label": "#414941",
+              "icon": "#414941"
+            },
+            "dark": {
+              "label": "#c1c9bc",
+              "icon": "#c1c9bc"
+            }
+          },
+          "hover": {
+            "light": "rgba(76,104,66,0.08)",
+            "dark": "rgba(179,208,169,0.08)"
+          },
+          "pressed": {
+            "light": "rgba(76,104,66,0.12)",
+            "dark": "rgba(179,208,169,0.12)"
+          }
+        },
+        "badge": {
+          "light": {
+            "container": "#4c6842",
+            "label": "#ffffff"
+          },
+          "dark": {
+            "container": "#b3d0a9",
+            "label": "#1f3a1a"
+          },
+          "radius": "10px (pill)",
+          "font_size": "11px",
+          "font_weight": "600"
+        },
+        "section_title": {
+          "font_size": "11px",
+          "font_weight": "500",
+          "letter_spacing": "0.08em",
+          "text_transform": "uppercase",
+          "light": "#414941",
+          "dark": "#c1c9bc"
+        }
+      },
+      "_logo_standard": {
+        "width": "120px",
+        "height": "80px",
+        "note": "APPROVED 2026-05-04 \u2014 consistent 120x80px across all 3 contexts: widget header (white), top app bar (white on green), drawer (primary color on surface)"
+      }
+    },
+    "chip": {
+      "_status": "COMPLETE \u2014 2026-05-04",
+      "_note": "3 variants: Filter (toggle), Input (removable tag), Assist (action). All Inter 500 14px. Height 32px. Radius 4px (AD standard). 1px default border, 2px focus ring.",
+      "shared": {
+        "height": "32px",
+        "radius": "4px",
+        "font": "Inter 500 14px",
+        "border_default": "1px",
+        "border_focused": "2px",
+        "icon_size": "16px",
+        "icon_stroke": "1.5px"
+      },
+      "filter": {
+        "light": {
+          "default": {
+            "container": "#f2f5ed",
+            "border": "1px solid #c1c9bc",
+            "label": "#414941"
+          },
+          "selected": {
+            "container": "#cde3c4",
+            "border": "none",
+            "label": "#0d1a0b",
+            "icon": "check 16px #0d1a0b"
+          },
+          "hover": {
+            "state_layer": "rgba(76,104,66,0.08)"
+          },
+          "focused": {
+            "outline": "2px solid #4c6842",
+            "outline_offset": "2px"
+          },
+          "disabled": {
+            "label": "rgba(25,28,23,0.38)",
+            "border": "1px solid rgba(25,28,23,0.12)"
+          }
+        },
+        "dark": {
+          "default": {
+            "container": "#1e211b",
+            "border": "1px solid #414941",
+            "label": "#c1c9bc"
+          },
+          "selected": {
+            "container": "#2f5229",
+            "border": "none",
+            "label": "#cde3c4",
+            "icon": "check 16px #cde3c4"
+          },
+          "hover": {
+            "state_layer": "rgba(179,208,169,0.08)"
+          },
+          "focused": {
+            "outline": "2px solid #b3d0a9",
+            "outline_offset": "2px"
+          },
+          "disabled": {
+            "label": "rgba(226,229,219,0.38)",
+            "border": "1px solid rgba(226,229,219,0.12)"
+          }
+        }
+      },
+      "input": {
+        "_note": "Always has trailing remove (\u00d7) icon. Selected uses secondary_container.",
+        "light": {
+          "default": {
+            "container": "#eceee7",
+            "border": "1px solid #c1c9bc",
+            "label": "#191c17"
+          },
+          "selected": {
+            "container": "#d1dadd",
+            "border": "none",
+            "label": "#121517"
+          },
+          "hover": {
+            "state_layer": "rgba(25,28,23,0.08)"
+          },
+          "focused": {
+            "outline": "2px solid #4c6842",
+            "outline_offset": "2px"
+          },
+          "disabled": {
+            "label": "rgba(25,28,23,0.38)",
+            "border": "1px solid rgba(25,28,23,0.12)"
+          }
+        },
+        "dark": {
+          "default": {
+            "container": "#282b25",
+            "border": "1px solid #414941",
+            "label": "#e2e5db"
+          },
+          "selected": {
+            "container": "#373f43",
+            "border": "none",
+            "label": "#d1dadd"
+          },
+          "hover": {
+            "state_layer": "rgba(226,229,219,0.08)"
+          },
+          "focused": {
+            "outline": "2px solid #b3d0a9",
+            "outline_offset": "2px"
+          },
+          "disabled": {
+            "label": "rgba(226,229,219,0.38)",
+            "border": "1px solid rgba(226,229,219,0.12)"
+          }
+        }
+      },
+      "assist": {
+        "_note": "Single-action only \u2014 no selected state. Optional leading icon.",
+        "light": {
+          "default": {
+            "container": "#ffffff",
+            "border": "1px solid #c1c9bc",
+            "label": "#414941"
+          },
+          "hover": {
+            "state_layer": "rgba(25,28,23,0.08)"
+          },
+          "focused": {
+            "outline": "2px solid #4c6842",
+            "outline_offset": "2px"
+          },
+          "disabled": {
+            "label": "rgba(25,28,23,0.38)",
+            "border": "1px solid rgba(25,28,23,0.12)"
+          }
+        },
+        "dark": {
+          "default": {
+            "container": "#1e211b",
+            "border": "1px solid #414941",
+            "label": "#c1c9bc"
+          },
+          "hover": {
+            "state_layer": "rgba(226,229,219,0.08)"
+          },
+          "focused": {
+            "outline": "2px solid #b3d0a9",
+            "outline_offset": "2px"
+          },
+          "disabled": {
+            "label": "rgba(226,229,219,0.38)",
+            "border": "1px solid rgba(226,229,219,0.12)"
+          }
+        }
+      }
+    },
+    "badge": {
+      "_status": "COMPLETE \u2014 2026-05-04",
+      "_note": "Two variants: Status (4px radius, semantic colors, industrial feel) and Count (pill/10px radius, primary or error color). Both use Inter.",
+      "status": {
+        "radius": "4px",
+        "font": "Inter 500 12px",
+        "padding": "3px 8px",
+        "dot_size": "6px",
+        "variants": {
+          "success": {
+            "light": {
+              "bg": "#cde3c4",
+              "text": "#0d1a0b",
+              "dot": "#4c6842"
+            },
+            "dark": {
+              "bg": "#2f5229",
+              "text": "#cde3c4",
+              "dot": "#b3d0a9"
+            },
+            "use": "Confirmed, Active, Delivered"
+          },
+          "warning": {
+            "light": {
+              "bg": "#fae3bc",
+              "text": "#231500",
+              "dot": "#885400"
+            },
+            "dark": {
+              "bg": "#6d4400",
+              "text": "#fae3bc",
+              "dot": "#f2cc88"
+            },
+            "use": "Pending, Review, Expiring"
+          },
+          "error": {
+            "light": {
+              "bg": "#F9DEDC",
+              "text": "#410E0B",
+              "dot": "#B3261E"
+            },
+            "dark": {
+              "bg": "#8C1D18",
+              "text": "#F9DEDC",
+              "dot": "#F2B8B5"
+            },
+            "use": "Cancelled, Failed, Overdue"
+          },
+          "info": {
+            "light": {
+              "bg": "#E6F1FB",
+              "text": "#042C53",
+              "dot": "#185FA5"
+            },
+            "dark": {
+              "bg": "#0C447C",
+              "text": "#B5D4F4",
+              "dot": "#85B7EB"
+            },
+            "use": "In Transit, Processing, Syncing"
+          },
+          "neutral": {
+            "light": {
+              "bg": "#eceee7",
+              "text": "#414941",
+              "border": "1px solid #c1c9bc"
+            },
+            "dark": {
+              "bg": "#282b25",
+              "text": "#c1c9bc",
+              "border": "1px solid #414941"
+            },
+            "use": "Draft, Inactive, Archived"
+          }
+        },
+        "outlined_variant": "Remove bg fill, add 1px border in dot color, text uses dot color"
+      },
+      "count": {
+        "radius": "10px (pill)",
+        "height": "20px",
+        "min_width": "20px",
+        "font": "Inter 600 11px",
+        "padding": "0 6px",
+        "overflow_label": "99+",
+        "primary": {
+          "light": {
+            "bg": "#4c6842",
+            "text": "#ffffff"
+          },
+          "dark": {
+            "bg": "#b3d0a9",
+            "text": "#1f3a1a"
+          },
+          "use": "Standard unread counts, nav item badges"
+        },
+        "error": {
+          "light": {
+            "bg": "#B3261E",
+            "text": "#ffffff"
+          },
+          "dark": {
+            "bg": "#F2B8B5",
+            "text": "#601410"
+          },
+          "use": "Urgent alerts, notifications requiring action"
+        },
+        "dot": {
+          "size": "8px",
+          "shape": "circle",
+          "color": "primary token",
+          "use": "Presence indicator, unread marker with no count"
+        }
+      }
+    },
+    "checkbox": {
+      "_status": "COMPLETE \u2014 2026-05-04",
+      "_spec": {
+        "size": "18x18px",
+        "border_radius": "3px",
+        "border_width": "1px",
+        "stroke_width": "1px",
+        "checkmark_stroke": "1.2px",
+        "ripple_zone": "36x36px",
+        "focus_ring": "1.5px, primary color"
+      },
+      "variants": [
+        "unselected",
+        "selected",
+        "indeterminate"
+      ],
+      "states": [
+        "default",
+        "hover",
+        "focus",
+        "pressed",
+        "error",
+        "disabled"
+      ],
+      "light": {
+        "unselected": {
+          "default": {
+            "stroke": "outline #73796e",
+            "fill": "transparent"
+          },
+          "hover": {
+            "stroke": "outline #73796e",
+            "fill": "transparent",
+            "ripple": "primary 8% opacity"
+          },
+          "focus": {
+            "stroke": "outline #73796e",
+            "fill": "transparent",
+            "ripple": "primary 12% opacity",
+            "focus_ring": "1.5px primary"
+          },
+          "pressed": {
+            "stroke": "outline #73796e",
+            "fill": "transparent",
+            "ripple": "primary 16% opacity"
+          },
+          "error": {
+            "stroke": "error #B3261E",
+            "fill": "transparent"
+          },
+          "disabled": {
+            "stroke": "on-surface 38% opacity",
+            "fill": "transparent"
+          }
+        },
+        "selected": {
+          "default": {
+            "stroke": "primary #4c6842",
+            "fill": "primary #4c6842",
+            "checkmark": "on-primary #ffffff"
+          },
+          "hover": {
+            "stroke": "primary #4c6842",
+            "fill": "primary #4c6842",
+            "checkmark": "on-primary #ffffff",
+            "ripple": "primary 8% opacity"
+          },
+          "focus": {
+            "stroke": "primary #4c6842",
+            "fill": "primary #4c6842",
+            "checkmark": "on-primary #ffffff",
+            "ripple": "primary 12% opacity",
+            "focus_ring": "1.5px primary"
+          },
+          "pressed": {
+            "stroke": "primary #4c6842",
+            "fill": "primary #4c6842",
+            "checkmark": "on-primary #ffffff",
+            "ripple": "primary 16% opacity"
+          },
+          "error": {
+            "stroke": "error #B3261E",
+            "fill": "error #B3261E",
+            "checkmark": "on-primary #ffffff"
+          },
+          "disabled": {
+            "stroke": "on-surface 38%",
+            "fill": "on-surface 38%",
+            "checkmark": "surface #ffffff"
+          }
+        },
+        "indeterminate": {
+          "default": {
+            "stroke": "primary #4c6842",
+            "fill": "primary #4c6842",
+            "bar": "on-primary #ffffff, 1.2px, centered"
+          },
+          "disabled": {
+            "stroke": "on-surface 38%",
+            "fill": "on-surface 38%",
+            "bar": "surface #ffffff"
+          }
+        }
+      },
+      "dark": {
+        "unselected": {
+          "default": {
+            "stroke": "outline #8d9387",
+            "fill": "transparent"
+          },
+          "hover": {
+            "stroke": "outline #8d9387",
+            "fill": "transparent",
+            "ripple": "primary 8% opacity"
+          },
+          "focus": {
+            "stroke": "outline #8d9387",
+            "fill": "transparent",
+            "ripple": "primary 12% opacity",
+            "focus_ring": "1.5px primary"
+          },
+          "pressed": {
+            "stroke": "outline #8d9387",
+            "fill": "transparent",
+            "ripple": "primary 16% opacity"
+          },
+          "error": {
+            "stroke": "error #F2B8B5",
+            "fill": "transparent"
+          },
+          "disabled": {
+            "stroke": "on-surface 38% opacity",
+            "fill": "transparent"
+          }
+        },
+        "selected": {
+          "default": {
+            "stroke": "primary #b3d0a9",
+            "fill": "primary #b3d0a9",
+            "checkmark": "on-primary #1f3a1a"
+          },
+          "hover": {
+            "stroke": "primary #b3d0a9",
+            "fill": "primary #b3d0a9",
+            "checkmark": "on-primary #1f3a1a",
+            "ripple": "primary 8% opacity"
+          },
+          "focus": {
+            "stroke": "primary #b3d0a9",
+            "fill": "primary #b3d0a9",
+            "checkmark": "on-primary #1f3a1a",
+            "ripple": "primary 12% opacity",
+            "focus_ring": "1.5px primary"
+          },
+          "pressed": {
+            "stroke": "primary #b3d0a9",
+            "fill": "primary #b3d0a9",
+            "checkmark": "on-primary #1f3a1a",
+            "ripple": "primary 16% opacity"
+          },
+          "error": {
+            "stroke": "error #F2B8B5",
+            "fill": "error #F2B8B5",
+            "checkmark": "on-primary #1f3a1a"
+          },
+          "disabled": {
+            "stroke": "on-surface 38%",
+            "fill": "on-surface 38%",
+            "checkmark": "surface #2b2d29"
+          }
+        },
+        "indeterminate": {
+          "default": {
+            "stroke": "primary #b3d0a9",
+            "fill": "primary #b3d0a9",
+            "bar": "on-primary #1f3a1a, 1.2px, centered"
+          },
+          "disabled": {
+            "stroke": "on-surface 38%",
+            "fill": "on-surface 38%",
+            "bar": "surface #2b2d29"
+          }
+        }
+      }
+    },
+    "radio_button": {
+      "_status": "COMPLETE \u2014 2026-05-04",
+      "_spec": {
+        "outer_size": "18x18px",
+        "border_radius": "50% (circle)",
+        "border_width": "1px",
+        "stroke_width": "1px",
+        "inner_dot_radius": "4.5px",
+        "ripple_zone": "36x36px",
+        "focus_ring": "1.5px, primary color"
+      },
+      "variants": [
+        "unselected",
+        "selected"
+      ],
+      "states": [
+        "default",
+        "hover",
+        "focus",
+        "pressed",
+        "error",
+        "disabled"
+      ],
+      "light": {
+        "unselected": {
+          "default": {
+            "stroke": "outline #73796e",
+            "fill": "transparent",
+            "dot": "none"
+          },
+          "hover": {
+            "stroke": "outline #73796e",
+            "fill": "transparent",
+            "dot": "none",
+            "ripple": "primary 8% opacity"
+          },
+          "focus": {
+            "stroke": "outline #73796e",
+            "fill": "transparent",
+            "dot": "none",
+            "ripple": "primary 12% opacity",
+            "focus_ring": "1.5px primary"
+          },
+          "pressed": {
+            "stroke": "outline #73796e",
+            "fill": "transparent",
+            "dot": "none",
+            "ripple": "primary 16% opacity"
+          },
+          "error": {
+            "stroke": "error #B3261E",
+            "fill": "transparent",
+            "dot": "none"
+          },
+          "disabled": {
+            "stroke": "on-surface 38%",
+            "fill": "transparent",
+            "dot": "none"
+          }
+        },
+        "selected": {
+          "default": {
+            "stroke": "primary #4c6842",
+            "fill": "transparent",
+            "dot": "primary #4c6842, r=4.5px"
+          },
+          "hover": {
+            "stroke": "primary #4c6842",
+            "fill": "transparent",
+            "dot": "primary #4c6842, r=4.5px",
+            "ripple": "primary 8% opacity"
+          },
+          "focus": {
+            "stroke": "primary #4c6842",
+            "fill": "transparent",
+            "dot": "primary #4c6842, r=4.5px",
+            "ripple": "primary 12% opacity",
+            "focus_ring": "1.5px primary"
+          },
+          "pressed": {
+            "stroke": "primary #4c6842",
+            "fill": "transparent",
+            "dot": "primary #4c6842, r=4.5px",
+            "ripple": "primary 16% opacity"
+          },
+          "error": {
+            "stroke": "error #B3261E",
+            "fill": "transparent",
+            "dot": "error #B3261E, r=4.5px"
+          },
+          "disabled": {
+            "stroke": "on-surface 38%",
+            "fill": "transparent",
+            "dot": "on-surface 38%, r=4.5px"
+          }
+        }
+      },
+      "dark": {
+        "unselected": {
+          "default": {
+            "stroke": "outline #8d9387",
+            "fill": "transparent",
+            "dot": "none"
+          },
+          "hover": {
+            "stroke": "outline #8d9387",
+            "fill": "transparent",
+            "dot": "none",
+            "ripple": "primary 8% opacity"
+          },
+          "focus": {
+            "stroke": "outline #8d9387",
+            "fill": "transparent",
+            "dot": "none",
+            "ripple": "primary 12% opacity",
+            "focus_ring": "1.5px primary"
+          },
+          "pressed": {
+            "stroke": "outline #8d9387",
+            "fill": "transparent",
+            "dot": "none",
+            "ripple": "primary 16% opacity"
+          },
+          "error": {
+            "stroke": "error #F2B8B5",
+            "fill": "transparent",
+            "dot": "none"
+          },
+          "disabled": {
+            "stroke": "on-surface 38%",
+            "fill": "transparent",
+            "dot": "none"
+          }
+        },
+        "selected": {
+          "default": {
+            "stroke": "primary #b3d0a9",
+            "fill": "transparent",
+            "dot": "primary #b3d0a9, r=4.5px"
+          },
+          "hover": {
+            "stroke": "primary #b3d0a9",
+            "fill": "transparent",
+            "dot": "primary #b3d0a9, r=4.5px",
+            "ripple": "primary 8% opacity"
+          },
+          "focus": {
+            "stroke": "primary #b3d0a9",
+            "fill": "transparent",
+            "dot": "primary #b3d0a9, r=4.5px",
+            "ripple": "primary 12% opacity",
+            "focus_ring": "1.5px primary"
+          },
+          "pressed": {
+            "stroke": "primary #b3d0a9",
+            "fill": "transparent",
+            "dot": "primary #b3d0a9, r=4.5px",
+            "ripple": "primary 16% opacity"
+          },
+          "error": {
+            "stroke": "error #F2B8B5",
+            "fill": "transparent",
+            "dot": "error #F2B8B5, r=4.5px"
+          },
+          "disabled": {
+            "stroke": "on-surface 38%",
+            "fill": "transparent",
+            "dot": "on-surface 38%, r=4.5px"
+          }
+        }
+      }
+    },
+    "slider": {
+      "_status": "COMPLETE \u2014 2026-05-04",
+      "_spec": {
+        "track_height": "1px",
+        "track_border_radius": "1px",
+        "thumb_size_default": "16x16px",
+        "thumb_size_pressed": "18x18px",
+        "thumb_size_disabled": "14x14px",
+        "ripple_zone": "40x40px",
+        "focus_ring": "1.5px primary",
+        "tick_size": "3x3px circle",
+        "value_label_font": "Inter 500, 11px"
+      },
+      "variants": [
+        "continuous",
+        "discrete",
+        "range"
+      ],
+      "states": [
+        "default",
+        "hover",
+        "focus",
+        "pressed",
+        "disabled"
+      ],
+      "light": {
+        "track": {
+          "active": "primary T40 #4c6842",
+          "inactive": "outline-variant #c3c8bc",
+          "disabled_active": "on-surface 38%",
+          "disabled_inactive": "on-surface 12%"
+        },
+        "thumb": {
+          "default": {
+            "fill": "primary T40 #4c6842",
+            "size": "16px"
+          },
+          "hover": {
+            "fill": "primary T40 #4c6842",
+            "size": "16px",
+            "ripple": "primary 8%"
+          },
+          "focus": {
+            "fill": "primary T40 #4c6842",
+            "size": "16px",
+            "ripple": "primary 12%",
+            "focus_ring": "1.5px primary"
+          },
+          "pressed": {
+            "fill": "primary T40 #4c6842",
+            "size": "18px",
+            "ripple": "primary 16%",
+            "value_label": "visible"
+          },
+          "disabled": {
+            "fill": "on-surface 38%",
+            "size": "14px"
+          }
+        },
+        "value_label": {
+          "bg": "primary T40 #4c6842",
+          "text": "on-primary #ffffff"
+        },
+        "tick": {
+          "active": "on-primary #ffffff",
+          "inactive": "surface #ffffff"
+        }
+      },
+      "dark": {
+        "track": {
+          "active": "primary T80 #b3d0a9",
+          "inactive": "outline-variant #43483f",
+          "disabled_active": "on-surface 38%",
+          "disabled_inactive": "on-surface 12%"
+        },
+        "thumb": {
+          "default": {
+            "fill": "primary T80 #b3d0a9",
+            "size": "16px"
+          },
+          "hover": {
+            "fill": "primary T80 #b3d0a9",
+            "size": "16px",
+            "ripple": "primary 8%"
+          },
+          "focus": {
+            "fill": "primary T80 #b3d0a9",
+            "size": "16px",
+            "ripple": "primary 12%",
+            "focus_ring": "1.5px primary"
+          },
+          "pressed": {
+            "fill": "primary T80 #b3d0a9",
+            "size": "18px",
+            "ripple": "primary 16%",
+            "value_label": "visible"
+          },
+          "disabled": {
+            "fill": "on-surface 38%",
+            "size": "14px"
+          }
+        },
+        "value_label": {
+          "bg": "primary T80 #b3d0a9",
+          "text": "on-primary #1f3a1a"
+        },
+        "tick": {
+          "active": "on-primary #1f3a1a",
+          "inactive": "surface #2b2d29"
+        }
+      }
+    },
+    "tabs": {
+      "_status": "COMPLETE \u2014 2026-05-04",
+      "_spec": {
+        "height": "48px",
+        "indicator_height": "2px",
+        "indicator_radius": "2px top corners",
+        "label_font": "Inter 500, 13px",
+        "icon_size": "18x18px",
+        "bottom_border": "1px outline-variant",
+        "ripple_zone": "full tab width"
+      },
+      "variants": [
+        "primary_text",
+        "primary_icon_label",
+        "secondary"
+      ],
+      "states": [
+        "default",
+        "hover",
+        "focus",
+        "pressed",
+        "disabled"
+      ],
+      "light": {
+        "tab_bar": {
+          "background": "surface #ffffff",
+          "bottom_border": "outline-variant #c3c8bc, 1px"
+        },
+        "tab_item": {
+          "active": {
+            "label": "primary #4c6842",
+            "indicator": "primary #4c6842, 2px"
+          },
+          "inactive": {
+            "label": "on-surface-variant #43483f",
+            "indicator": "none"
+          },
+          "hover": {
+            "label": "on-surface-variant",
+            "ripple": "primary 8%"
+          },
+          "focus": {
+            "label": "on-surface-variant",
+            "ripple": "primary 12%",
+            "focus_ring": "1.5px primary inset"
+          },
+          "pressed": {
+            "label": "on-surface-variant",
+            "ripple": "primary 16%"
+          },
+          "disabled": {
+            "label": "on-surface 38%",
+            "indicator": "none"
+          }
+        },
+        "secondary_indicator": "on-surface #1a1c19, 2px"
+      },
+      "dark": {
+        "tab_bar": {
+          "background": "surface #2b2d29",
+          "bottom_border": "outline-variant #43483f, 1px"
+        },
+        "tab_item": {
+          "active": {
+            "label": "primary #b3d0a9",
+            "indicator": "primary #b3d0a9, 2px"
+          },
+          "inactive": {
+            "label": "on-surface-variant #c3c8bc",
+            "indicator": "none"
+          },
+          "hover": {
+            "label": "on-surface-variant",
+            "ripple": "primary 8%"
+          },
+          "focus": {
+            "label": "on-surface-variant",
+            "ripple": "primary 12%",
+            "focus_ring": "1.5px primary inset"
+          },
+          "pressed": {
+            "label": "on-surface-variant",
+            "ripple": "primary 16%"
+          },
+          "disabled": {
+            "label": "on-surface 38%",
+            "indicator": "none"
+          }
+        },
+        "secondary_indicator": "on-surface #e2e3dc, 2px"
+      }
+    },
+    "accordion": {
+      "_status": "COMPLETE \u2014 2026-05-04",
+      "_spec": {
+        "header_min_height": "52px",
+        "header_padding": "14px 16px",
+        "title_font": "Inter 500, 14px",
+        "subtitle_font": "Inter 400, 12px",
+        "body_font": "Inter 400, 13px",
+        "body_padding": "12px 16px 16px",
+        "border": "1px outline-variant",
+        "border_radius": "4px",
+        "chevron_size": "18x18px, 1px stroke",
+        "chevron_rotation": "0deg collapsed, 180deg expanded",
+        "chevron_transition": "220ms ease",
+        "focus_ring": "1.5px primary inset"
+      },
+      "variants": [
+        "standalone",
+        "with_icon_subtitle",
+        "group"
+      ],
+      "states": [
+        "collapsed",
+        "expanded",
+        "hover",
+        "focus",
+        "pressed",
+        "disabled"
+      ],
+      "light": {
+        "header": {
+          "background": "surface #ffffff",
+          "title_color": "on-surface #1a1c19",
+          "subtitle_color": "on-surface-variant #43483f",
+          "chevron_color": "on-surface-variant #43483f",
+          "border": "outline-variant #c3c8bc, 1px"
+        },
+        "states": {
+          "hover": "primary 6% over surface",
+          "focus": "primary 10% over surface + 1.5px primary focus ring inset",
+          "pressed": "primary 14% over surface",
+          "disabled": "title on-surface 38%, chevron opacity 38%"
+        },
+        "body": {
+          "background": "surface #ffffff",
+          "text_color": "on-surface-variant #43483f",
+          "top_border": "outline-variant #c3c8bc, 1px"
+        }
+      },
+      "dark": {
+        "header": {
+          "background": "surface #2b2d29",
+          "title_color": "on-surface #e2e3dc",
+          "subtitle_color": "on-surface-variant #c3c8bc",
+          "chevron_color": "on-surface-variant #c3c8bc",
+          "border": "outline-variant #43483f, 1px"
+        },
+        "states": {
+          "hover": "primary 6% over surface",
+          "focus": "primary 10% over surface + 1.5px primary focus ring inset",
+          "pressed": "primary 14% over surface",
+          "disabled": "title on-surface 38%, chevron opacity 38%"
+        },
+        "body": {
+          "background": "surface #2b2d29",
+          "text_color": "on-surface-variant #c3c8bc",
+          "top_border": "outline-variant #43483f, 1px"
+        }
+      }
+    },
+    "segmented_button": {
+      "_status": "COMPLETE \u2014 2026-05-04",
+      "_spec": {
+        "height": "36px",
+        "padding": "0 16px",
+        "border_radius": "4px",
+        "outer_border": "1px outline",
+        "divider_border": "1px outline",
+        "font": "Inter 500, 13px",
+        "check_icon": "14x14px, 1px stroke",
+        "focus_ring": "1.5px primary inset"
+      },
+      "variants": [
+        "single_select",
+        "multi_select",
+        "with_icon"
+      ],
+      "states": [
+        "default",
+        "hover",
+        "focus",
+        "pressed",
+        "disabled"
+      ],
+      "light": {
+        "unselected": {
+          "bg": "surface #ffffff",
+          "label": "on-surface-variant #43483f"
+        },
+        "selected": {
+          "bg": "secondary-container #d1dadd",
+          "label": "on-secondary-container #050f12",
+          "check_icon": "visible"
+        },
+        "hover": "primary 8% over bg",
+        "focus": "primary 12% over bg + 1.5px primary focus ring inset",
+        "pressed": "primary 16% over bg",
+        "disabled": {
+          "bg": "on-surface 12%",
+          "label": "on-surface 38%",
+          "border": "on-surface 38%"
+        }
+      },
+      "dark": {
+        "unselected": {
+          "bg": "surface #2b2d29",
+          "label": "on-surface-variant #c3c8bc"
+        },
+        "selected": {
+          "bg": "secondary-container #354a4e",
+          "label": "on-secondary-container #cde3c4",
+          "check_icon": "visible"
+        },
+        "hover": "primary 8% over bg",
+        "focus": "primary 12% over bg + 1.5px primary focus ring inset",
+        "pressed": "primary 16% over bg",
+        "disabled": {
+          "bg": "on-surface 12%",
+          "label": "on-surface 38%",
+          "border": "on-surface 38%"
+        }
+      }
+    },
+    "data_table": {
+      "_status": "COMPLETE \u2014 2026-05-04",
+      "_spec": {
+        "header_font": "Inter 500, 11px",
+        "cell_font": "Inter 400, 12px",
+        "cell_padding": "10px 12px",
+        "row_border": "1px outline-variant",
+        "outer_border": "1px outline-variant",
+        "border_radius": "4px",
+        "checkbox_size": "15x15px, 1px border, 2px radius",
+        "sort_icon": "4px triangle, primary when active",
+        "pagination_height": "40px"
+      },
+      "variants": [
+        "basic",
+        "with_selection",
+        "with_sort",
+        "with_pagination"
+      ],
+      "states": [
+        "default",
+        "hover",
+        "selected",
+        "selected_hover",
+        "sort_asc",
+        "sort_desc"
+      ],
+      "light": {
+        "header": {
+          "bg": "surface-container #f4faf1",
+          "label": "on-surface-variant #43483f"
+        },
+        "row": {
+          "default": {
+            "bg": "surface #ffffff",
+            "text": "on-surface #1a1c19"
+          },
+          "hover": {
+            "bg": "primary 6% #eef4eb"
+          },
+          "selected": {
+            "bg": "primary-container #edf3ea"
+          },
+          "selected_hover": {
+            "bg": "primary 8% over primary-container"
+          }
+        },
+        "sort": {
+          "active_color": "primary #4c6842",
+          "inactive_opacity": "40%"
+        },
+        "pagination": {
+          "active_bg": "primary #4c6842",
+          "active_text": "on-primary #ffffff"
+        },
+        "selected_toolbar": {
+          "bg": "primary-container #cde3c4",
+          "text": "on-primary-container #0d1a0b"
+        },
+        "badges": {
+          "success": {
+            "bg": "success-container #c3f093",
+            "text": "success #386a1f"
+          },
+          "warning": {
+            "bg": "warning-container #fae3bc",
+            "text": "warning #885400"
+          },
+          "error": {
+            "bg": "error-container #F9DEDC",
+            "text": "error #B3261E"
+          },
+          "neutral": {
+            "bg": "outline-variant #c3c8bc",
+            "text": "on-surface-variant #43483f"
+          }
+        }
+      },
+      "dark": {
+        "header": {
+          "bg": "surface-container #222520",
+          "label": "on-surface-variant #c3c8bc"
+        },
+        "row": {
+          "default": {
+            "bg": "surface #2b2d29",
+            "text": "on-surface #e2e3dc"
+          },
+          "hover": {
+            "bg": "primary 6% over surface"
+          },
+          "selected": {
+            "bg": "#243322"
+          },
+          "selected_hover": {
+            "bg": "#2c3e2a"
+          }
+        },
+        "sort": {
+          "active_color": "primary #b3d0a9",
+          "inactive_opacity": "40%"
+        },
+        "pagination": {
+          "active_bg": "primary #b3d0a9",
+          "active_text": "on-primary #1f3a1a"
+        },
+        "selected_toolbar": {
+          "bg": "primary-container #2f5229",
+          "text": "on-primary-container #cde3c4"
+        },
+        "badges": {
+          "success": {
+            "bg": "success-container #1d4a00",
+            "text": "success #a9d47f"
+          },
+          "warning": {
+            "bg": "warning-container #4a2e00",
+            "text": "warning #f2cc88"
+          },
+          "error": {
+            "bg": "error-container #601410",
+            "text": "error #F2B8B5"
+          },
+          "neutral": {
+            "bg": "outline-variant #43483f",
+            "text": "on-surface-variant #c3c8bc"
+          }
+        }
+      }
+    },
+    "banner_alert": {
+      "_status": "COMPLETE \u2014 2026-05-05",
+      "_spec": {
+        "banner_padding": "12px 14px",
+        "border_radius": "4px",
+        "left_border": "3px solid semantic color",
+        "title_font": "Inter 500, 13px",
+        "body_font": "Inter 400, 12px",
+        "icon_size": "16x16px, 1px stroke",
+        "dismiss_icon": "12x12px, 1px stroke",
+        "inline_padding": "6px 10px",
+        "inline_font": "Inter 500, 12px"
+      },
+      "variants": [
+        "banner_full",
+        "inline_alert"
+      ],
+      "semantic_types": [
+        "info",
+        "success",
+        "warning",
+        "error"
+      ],
+      "light": {
+        "info": {
+          "bg": "info-container #dbeafe",
+          "border": "info #1565c0",
+          "title": "on-info-container #0d2d6b",
+          "body": "on-info-container 85%"
+        },
+        "success": {
+          "bg": "success-container #dcfce7",
+          "border": "success #386a1f",
+          "title": "on-success-container #14401a",
+          "body": "on-success-container 85%"
+        },
+        "warning": {
+          "bg": "warning-container #fef3c7",
+          "border": "warning #885400",
+          "title": "on-warning-container #4a2e00",
+          "body": "on-warning-container 85%"
+        },
+        "error": {
+          "bg": "error-container #fde8e8",
+          "border": "error #B3261E",
+          "title": "on-error-container #601410",
+          "body": "on-error-container 85%"
+        }
+      },
+      "dark": {
+        "info": {
+          "bg": "info-container #0d2d6b",
+          "border": "info #90caf9",
+          "title": "on-info-container #dbeafe",
+          "body": "on-info-container 85%"
+        },
+        "success": {
+          "bg": "success-container #14401a",
+          "border": "success #a9d47f",
+          "title": "on-success-container #dcfce7",
+          "body": "on-success-container 85%"
+        },
+        "warning": {
+          "bg": "warning-container #4a2e00",
+          "border": "warning #f2cc88",
+          "title": "on-warning-container #fef3c7",
+          "body": "on-warning-container 85%"
+        },
+        "error": {
+          "bg": "error-container #601410",
+          "border": "error #F2B8B5",
+          "title": "on-error-container #fde8e8",
+          "body": "on-error-container 85%"
+        }
+      }
+    }
+  },
+  "textures": {
+    "_status": "COMPLETE — 2026-05-05",
+    "_note": "Artistic flair textures — optional overlay layer applied to page backgrounds and hero surfaces. Always semi-transparent overlays, never replacing content surfaces. Cards and UI components sit above the texture layer with full opacity white/dark backgrounds.",
+    "_usage_rule": "Apply as a background-image + opacity overlay on the page body or section containers. Never apply directly to cards, inputs, or interactive elements.",
+    "dot_grid": {
+      "_status": "APPROVED — 2026-05-05",
+      "name": "Dot Grid",
+      "id": "texture_dot_grid",
+      "file": "texture_dot_grid.svg",
+      "type": "svg_repeating_pattern",
+      "pattern_spec": {
+        "tile_width": "18px",
+        "tile_height": "18px",
+        "element": "circle",
+        "cx": "9",
+        "cy": "9",
+        "radius": "1.2px",
+        "stroke": "none",
+        "fill": "currentColor"
+      },
+      "light_mode": {
+        "color": "#4c6842",
+        "color_token": "primary T40",
+        "opacity": "15%",
+        "background_base": "#f4f6f4"
+      },
+      "dark_mode": {
+        "color": "#b3d0a9",
+        "color_token": "primary T80",
+        "opacity": "12%",
+        "background_base": "#141714",
+        "note": "Reduced to 12% in dark mode — dark bg amplifies perceived contrast of the pattern"
+      },
+      "css_light": "background-image: url('texture_dot_grid.svg'); background-size: 18px 18px; opacity: 0.15;",
+      "css_dark": "background-image: url('texture_dot_grid.svg'); background-size: 18px 18px; opacity: 0.12;",
+      "recommended_surfaces": [
+        "Dashboard page background",
+        "Data Table page background",
+        "Settings page background",
+        "Form page background",
+        "Any data-dense neutral background zone"
+      ],
+      "avoid_on": [
+        "Card surfaces",
+        "Input fields",
+        "Navigation bars",
+        "Any surface with text directly on it"
+      ]
+    },
+    "diagonal_lines": {
+      "_status": "APPROVED — 2026-05-05",
+      "name": "Diagonal Lines",
+      "id": "texture_diagonal_lines",
+      "file": "texture_diagonal_lines.svg",
+      "type": "svg_repeating_pattern",
+      "pattern_spec": {
+        "tile_width": "12px",
+        "tile_height": "12px",
+        "element": "line",
+        "x1": "0",
+        "y1": "12",
+        "x2": "12",
+        "y2": "0",
+        "angle": "45deg",
+        "stroke_width": "0.8px",
+        "stroke": "currentColor",
+        "fill": "none"
+      },
+      "light_mode": {
+        "color": "#4c6842",
+        "color_token": "primary T40",
+        "opacity": "15%",
+        "background_base": "#f4f6f4"
+      },
+      "dark_mode": {
+        "color": "#b3d0a9",
+        "color_token": "primary T80",
+        "opacity": "12%",
+        "background_base": "#141714",
+        "note": "Reduced to 12% in dark mode — dark bg amplifies perceived contrast of the pattern"
+      },
+      "css_light": "background-image: url('texture_diagonal_lines.svg'); background-size: 12px 12px; opacity: 0.15;",
+      "css_dark": "background-image: url('texture_diagonal_lines.svg'); background-size: 12px 12px; opacity: 0.12;",
+      "recommended_surfaces": [
+        "Hero strips and banner areas",
+        "Login page hero section",
+        "Profile page hero background",
+        "Section divider accent zones",
+        "Card accent headers"
+      ],
+      "avoid_on": [
+        "Card surfaces",
+        "Input fields",
+        "Navigation bars",
+        "Any surface with text directly on it"
+      ]
+    }
+  },
+  "pages_patterns": {
+    "_status": "COMPLETE \u2014 all 6 page patterns approved 2026-05-05",
+    "login_page": {
+      "_status": "COMPLETE \u2014 2026-05-05 (revised ratio 2026-05-05)",
+      "color_ratio": "70% primary / 15% secondary / 15% tertiary",
+      "color_ratio_previous": "70% primary / 20% secondary / 10% tertiary \u2014 SUPERSEDED",
+      "color_rule": "Primary anchors structure (app bar, hero strip bg #cde3c4 primary tint, card 3px top border, Sign In button, field focus rings, checkbox fill). Secondary carries supporting chrome (full-width footer bg, field labels, helper text, 'or' divider text \u2014 reduced from hero strip to just text/footer roles). Tertiary accents all actions equally (SSO button amber outline, Forgot password link, Register link, card footer links, footer nav links, hero badge, eyebrow label \u2014 increased from 10% to match secondary at 15%).",
+      "key_change_from_previous": "Hero strip: was secondary slate bg \u2192 now primary tint (#cde3c4). SSO button: was secondary slate outline \u2192 now tertiary amber outline (#885400). Result: secondary drops from 20% to 15%, tertiary rises from 10% to 15%.",
+      "components_used": [
+        "top_app_bar",
+        "text_field_outlined",
+        "button_filled",
+        "button_outlined",
+        "checkbox",
+        "banner_alert",
+        "divider"
+      ],
+      "states": [
+        "default",
+        "error",
+        "loading"
+      ],
+      "layout": {
+        "app_bar_height": "56px",
+        "hero_strip": "secondary bg with tertiary eyebrow label",
+        "card_max_width": "360px",
+        "card_border_top": "3px primary",
+        "page_footer": "secondary bg with tertiary-light footer links"
+      },
+      "typography": {
+        "page_headline": "Inter 500, 15px \u2014 NOT Arvo (form context, not display)",
+        "hero_headline": "Arvo 700, 22px \u2014 display context in hero strip",
+        "labels": "Inter 500, 11px",
+        "body": "Inter 400, 12-13px"
+      }
+    },
+    "dashboard": {
+      "_status": "COMPLETE \u2014 2026-05-05",
+      "color_ratio": "70% primary / 15% secondary / 15% tertiary",
+      "components_used": [
+        "top_app_bar",
+        "card_elevated",
+        "badge",
+        "progress_indicator",
+        "data_table",
+        "navigation_bar"
+      ],
+      "layout": {
+        "app_bar": "primary bg, logo, nav links with tertiary active underline, avatar in secondary",
+        "hero_strip": "deep primary bg, Arvo headline, tertiary member badge",
+        "metrics_grid": "4 cards, primary-xlight bg, tertiary for amber trend indicators",
+        "content_grid": "2-col \u2014 orders table left, rebate+supplier+actions right",
+        "rebate_card_header": "tertiary bg (15%)",
+        "supplier_card_header": "secondary bg (15%)",
+        "quick_actions": "primary icon backgrounds, tertiary section links"
+      },
+      "typography": {
+        "hero_headline": "Arvo 700, 20px",
+        "section_titles": "Inter 500, 13px",
+        "metric_values": "Inter 500, 20px",
+        "table_headers": "Inter 500, 10px uppercase",
+        "body": "Inter 400, 12px"
+      }
+    },
+    "data_table_page": {
+      "_status": "COMPLETE — 2026-05-05",
+      "color_ratio": "70% primary / 15% secondary / 15% tertiary",
+      "color_rule": "Primary anchors structure (app bar, left nav, CTA buttons, order links, stat border accent, row hover, checkbox fill, active pagination). Secondary carries chrome (table column header bar, filter buttons, breadcrumb, inactive pagination). Tertiary accents actions (Export CSV button, sort indicator arrow, nav badges, notification dot, pending badge, amber stat delta text).",
+      "components_used": [
+        "top_app_bar",
+        "navigation_drawer",
+        "data_table",
+        "chip_filter",
+        "search_bar",
+        "badge",
+        "button_filled",
+        "button_outlined",
+        "checkbox",
+        "progress_indicator"
+      ],
+      "layout": {
+        "app_bar": "primary bg, logo left, top nav center-right, bell + avatar right",
+        "left_nav": "primary dark (#2f5229), 152px, section labels, active item tertiary left-border accent",
+        "page_header": "white bg, Arvo 700 24px title, breadcrumb, New Order CTA",
+        "stats_row": "4 metric cards — Total Orders (primary left-border accent), Pending (amber delta), In Transit, Revenue MTD",
+        "toolbar": "search bar + Filter/Status/Date dropdowns left, Columns + Export CSV right",
+        "table_header": "secondary slate bg (#494e52), white text, sorted column in tertiary amber",
+        "table_body": "white rows, 1px row divider, green hover, green order# links, 5 status badge variants",
+        "pagination": "left info text, right page buttons, active page in primary green"
+      },
+      "status_badges": {
+        "delivered": "primary tint bg (#cde3c4), primary dark text (#1f3a1a)",
+        "shipped": "secondary tint bg (#d1dadd), secondary dark text (#373f43)",
+        "pending": "tertiary tint bg (#fae3bc), tertiary dark text (#6d4400)",
+        "processing": "primary xlight bg (#e8f4e3), primary medium text (#2f5229)",
+        "cancelled": "red tint bg (#fde8e8), red dark text (#7a1c1c)"
+      },
+      "typography": {
+        "page_headline": "Arvo 700, 24px — display context, one per screen",
+        "table_headers": "Inter 500, 10px uppercase, letter-spacing 0.04em",
+        "body_data": "Inter 400, 11px",
+        "stat_values": "Inter 500, 18px",
+        "stat_labels": "Inter 500, 9px uppercase",
+        "action_buttons": "Inter 500, 10px"
+      },
+      "dark_mode": "All surfaces invert to deep green/slate scale. Primary nav darkens to #162d13. Table header shifts to #373f43. Badges use dark-mode tint variants."
+    },
+    "form_page": {
+      "_status": "COMPLETE — 2026-05-05",
+      "color_ratio": "70% primary / 15% secondary / 15% tertiary",
+      "color_rule": "Primary anchors structure (app bar, left nav, step active/complete circles, section number circles, Submit button, field focus rings, checkbox/radio fill). Secondary carries supporting chrome (field labels, helper text, inactive steps, Cancel button, breadcrumb). Tertiary accents key actions (required asterisks, Save as Draft amber outline button, nav badges, notification dot).",
+      "components_used": [
+        "top_app_bar",
+        "navigation_drawer",
+        "text_field_outlined",
+        "select_field",
+        "radio_button",
+        "checkbox",
+        "button_filled",
+        "button_outlined",
+        "divider",
+        "progress_stepper"
+      ],
+      "layout": {
+        "app_bar": "primary bg, logo, nav, bell + avatar",
+        "left_nav": "primary dark (#2f5229), active item tertiary left-border",
+        "page_header": "white bg, Arvo 700 24px title, breadcrumb, subtitle",
+        "stepper": "4-step horizontal — completed (primary filled ✓), active (primary + ring glow), upcoming (white + slate border)",
+        "form_sections": "3 numbered sections — Order Information, Product Details, Delivery & Options",
+        "section_header": "white bg, primary circle number, Inter 500 title, tertiary-tint badge for active section",
+        "field_grid": "2-col for paired fields, 3-col for short fields, full-width for textarea",
+        "form_actions": "Submit (primary filled) + Save as Draft (tertiary amber outline) + required note + Cancel (right-aligned)"
+      },
+      "form_controls": {
+        "input_border": "1px solid rgba(0,0,0,.2), focus: primary green + glow",
+        "select": "1px border + chevron, focus: primary green",
+        "radio_selected": "primary green dot + primary border",
+        "checkbox_checked": "primary green fill, white checkmark 1px stroke",
+        "textarea": "1px border, 60px height, resize none"
+      },
+      "typography": {
+        "page_headline": "Arvo 700, 24px",
+        "field_labels": "Inter 500, 10px, secondary slate color",
+        "field_values": "Inter 400, 11px",
+        "section_titles": "Inter 500, 12px",
+        "button_labels": "Inter 500, 12px",
+        "helper_text": "Inter 400, 9px"
+      },
+      "dark_mode": "Surfaces shift to deep green/slate. Inputs use dark fill (#252a24). Focus rings use primary tint. Labels use secondary tint color."
+    },
+    "profile_page": {
+      "_status": "COMPLETE — 2026-05-05",
+      "color_ratio": "70% primary / 15% secondary / 15% tertiary",
+      "color_rule": "Primary anchors structure (app bar, left nav, profile hero bg #2f5229, avatar circle, section header icon fills, Save button, tier progress bar, order activity dots). Secondary carries chrome (body bg, info labels, inactive nav, contact form text, Change Password/Sign Out buttons, account tag chips). Tertiary accents actions (Edit Profile amber outline button, nav badges, notification dot, rebate/report activity dots, premier badge fill, tier percentage, delta text).",
+      "components_used": [
+        "top_app_bar",
+        "navigation_drawer",
+        "card_elevated",
+        "badge",
+        "progress_indicator",
+        "button_filled",
+        "button_outlined",
+        "list"
+      ],
+      "layout": {
+        "app_bar": "primary bg, logo, top nav, bell + bordered avatar",
+        "left_nav": "primary dark (#2f5229), Profile active with tertiary left-border",
+        "profile_hero": "deep primary (#2f5229) strip — Arvo avatar initials, Arvo name, role, meta row, Premier + Active badges",
+        "content_grid": "2-col upper (Contact Info + Account Performance), full-width lower (Recent Activity)",
+        "contact_card": "read-only info fields in 2-col sub-grid",
+        "stats_card": "2x2 mini-stat grid + tier progress bar",
+        "activity_list": "5 items — color-coded dots (green=order, amber=finance/report, slate=account), tagged chips"
+      },
+      "typography": {
+        "profile_name": "Arvo 700, 22px — display context in hero",
+        "avatar_initials": "Arvo 700, 22px",
+        "section_titles": "Inter 500, 11px",
+        "info_labels": "Inter 500, 9px uppercase",
+        "info_values": "Inter 400, 11px",
+        "stat_values": "Inter 500, 16px",
+        "activity_text": "Inter 400, 11px"
+      },
+      "dark_mode": "Hero deepens to #1f3a1a. Cards shift to #1c1f1b. Mini-stats use #252a24. All text adapts to tint palette."
+    },
+    "settings_page": {
+      "_status": "COMPLETE — 2026-05-05",
+      "color_ratio": "70% primary / 15% secondary / 15% tertiary",
+      "color_rule": "Primary anchors structure (app bar, main nav, active settings category left-border + tint, section icon fills, toggle switch ON state, Save button). Secondary carries chrome (settings category nav bg, inactive labels, Discard button, select dropdowns, body text, section dividers). Tertiary accents (nav badges, notification dot, avatar border, amber channel pills for rebate alerts, Order Defaults 'New' badge). Danger zone uses independent semantic red.",
+      "components_used": [
+        "top_app_bar",
+        "navigation_drawer",
+        "switch",
+        "select_field",
+        "list",
+        "button_filled",
+        "button_outlined",
+        "divider",
+        "badge"
+      ],
+      "layout": {
+        "app_bar": "primary bg, logo, top nav, bell + bordered avatar",
+        "main_left_nav": "primary dark (#2f5229), Settings active with tertiary left-border",
+        "settings_category_nav": "white bg, 148px, 7 categories in 2 groups — active item has primary left-border + light tint bg",
+        "settings_content": "right panel — 3 sections: Notification Preferences, Delivery & Regional, Danger Zone",
+        "notification_section": "5 toggle rows — each with label, description, channel pills (Email/SMS/Push), and Switch",
+        "channel_pills": "green tint = on, gray = off, amber tint = rebate-specific",
+        "delivery_section": "3 select rows — shipping method, time zone, export format",
+        "danger_zone": "red-bordered card, red header bg, Export Data + Deactivate with red outline buttons"
+      },
+      "notification_items": [
+        "Order status updates (Email ON, SMS ON, Push OFF)",
+        "Delivery confirmations (Email ON, SMS OFF, Push OFF)",
+        "Weekly order summary (Email ON, SMS OFF)",
+        "Rebate threshold alerts (Email ON amber, SMS ON amber)",
+        "Promotional updates (Email OFF, SMS OFF — toggle OFF)"
+      ],
+      "typography": {
+        "page_headline": "Arvo 700, 24px",
+        "category_labels": "Inter 500, 11px",
+        "section_titles": "Inter 500, 12px",
+        "toggle_labels": "Inter 500, 11px",
+        "toggle_desc": "Inter 400, 10px",
+        "select_options": "Inter 400, 11px"
+      },
+      "dark_mode": "Settings nav shifts to #1c1f1b. Active category to #252a24. Toggles retain primary green. Selects use dark fill. Danger zone header to #2d1010."
+    },
+    "_color_system_rule": {
+      "note": "All page patterns use a uniform 70/15/15 color ratio. Approved and finalized 2026-05-05.",
+      "universal_ratio": "70% primary / 15% secondary / 15% tertiary — ALL 6 pages",
+      "login_page": "70% primary / 15% secondary / 15% tertiary (revised — was 70/20/10)",
+      "dashboard": "70% primary / 15% secondary / 15% tertiary",
+      "data_table_page": "70% primary / 15% secondary / 15% tertiary",
+      "form_page": "70% primary / 15% secondary / 15% tertiary",
+      "profile_page": "70% primary / 15% secondary / 15% tertiary",
+      "settings_page": "70% primary / 15% secondary / 15% tertiary",
+      "primary_role": "Structural dominance — app bar, nav, hero tints, CTAs, active states, progress, fills",
+      "secondary_role": "Supporting chrome — labels, helper text, inactive states, footer bars, secondary actions",
+      "tertiary_role": "Accent energy — links, badges, SSO/draft/export buttons, highlights, warnings, eyebrows"
+    }
+  },
+  "session_log": [
+    {
+      "date": "2026-05-03",
+      "completed": [
+        "Brand identity research (AD \u2014 Affiliated Distributors)",
+        "M3 color system research",
+        "Source colors confirmed: primary #4c6842 Forest Green, secondary #494e52 Steel Slate",
+        "Tertiary color generated AND APPROVED: #885400 Warm Amber (M3 60\u00b0 offset rule)",
+        "Full tonal palettes generated for all 6 palette groups (13 tones each)",
+        "Semantic color roles defined for light + dark themes (40+ roles)",
+        "Typography scale updated: Arvo 700 for display/headlines (APPROVED), Inter for body/UI",
+        "Display treatment: uppercase, tight tracking on headline roles",
+        "Spacing scale defined: 4px base unit, 14 steps",
+        "Border radius updated: 4px default (xs) for buttons/inputs/chips (APPROVED)",
+        "Card radius: 8px (sm). Dialog radius: 12px (md)",
+        "Border width token added: 1px default on all cards and buttons (APPROVED)",
+        "Focus ring: 2px only",
+        "Elevation scale defined: 5 levels, M3 tonal + shadow",
+        "Motion tokens defined: professional easing, no bounce",
+        "Outdoor earth tone extension added: canyon, sandstone, sage, pine palettes",
+        "AD logo received and analyzed: geometry, color confirmation, usage rules all saved",
+        "Logo primary green #4c6842 confirmed exact match",
+        "Logo near-black #0d0d0d added as dark surface reference",
+        "Icon system direction established: angular, geometric, 1.5-2px stroke, no rounded terminals",
+        "Mountain layered peak motif noted for dividers, hero shapes, section transitions"
+      ],
+      "approved_tokens": {
+        "primary": "#4c6842",
+        "secondary": "#494e52",
+        "tertiary": "#885400",
+        "display_font": "Arvo 700",
+        "body_font": "Inter 400/500",
+        "radius_default": "4px",
+        "radius_cards": "8px",
+        "radius_dialogs": "12px",
+        "border_width": "1px",
+        "focus_ring": "2px"
+      },
+      "next_session": [
+        "Build Button component tokens \u2014 all 4 variants (filled, outlined, tonal, text) with all states (default, hover, pressed, focused, disabled)",
+        "Build Card component tokens \u2014 all 3 variants (elevated, filled, outlined) with all states",
+        "Build Input/Text Field tokens \u2014 filled and outlined variants",
+        "Build Navigation tokens \u2014 top app bar and drawer",
+        "Build Chip tokens \u2014 filter, input, assist variants",
+        "Build Badge tokens \u2014 status and count variants",
+        "Build Dialog tokens",
+        "Build FAB tokens",
+        "Full page preview \u2014 homepage hero and member dashboard",
+        "Icon system style guide based on mountain mark geometry"
+      ]
+    },
+    {
+      "date": "2026-05-03",
+      "completed": [
+        "Input / Text Field component tokens \u2014 outlined and filled variants, 5 states each, light + dark"
+      ],
+      "components_complete": [
+        "button",
+        "card",
+        "input",
+        "navigation",
+        "chip",
+        "badge",
+        "dialog",
+        "fab"
+      ],
+      "next": "Full Page Preview \u2014 homepage hero + member dashboard",
+      "end_of_session_note": "Session ended 2026-05-03. All foundation tokens + Button + Card + Input complete. Resume next session with Navigation component.",
+      "next_component": "FAB (Floating Action Button)",
+      "remaining_components": [
+        "Navigation (top app bar + drawer)",
+        "Chip \u2014 filter, input, assist variants",
+        "Badge \u2014 status (4px) and count (pill) variants",
+        "Dialog",
+        "FAB (Floating Action Button)",
+        "Full page preview \u2014 homepage hero + member dashboard"
+      ]
+    },
+    {
+      "date": "2026-05-04",
+      "completed": [
+        "Navigation component (top app bar + drawer) \u2014 all states, light + dark",
+        "Chip component \u2014 filter, input, assist variants \u2014 all states, light + dark",
+        "Badge component \u2014 status (4px dot) and count (pill) variants, 5 semantic colors",
+        "Dialog component \u2014 standard, fullscreen, confirmation variants \u2014 all states, light + dark",
+        "FAB component \u2014 surface, primary, secondary, tertiary sizes \u2014 all states, light + dark",
+        "Toggle button fix \u2014 solution documented: use <div class=\"tbtn\"> with !important CSS, color #3c4b33",
+        "Checkbox component \u2014 all 3 variants (unselected, selected, indeterminate), all 6 states, light + dark, 1px stroke",
+        "Radio Button component \u2014 all 2 variants (unselected, selected), all 6 states, light + dark, 1px stroke",
+        "Slider component \u2014 continuous, discrete, range variants \u2014 all states, light + dark, 1px track",
+        "Tabs component \u2014 primary text, primary icon+label, secondary variants \u2014 all states, light + dark, 2px indicator",
+        "Accordion component \u2014 standalone, icon+subtitle, group variants \u2014 all states, light + dark, 220ms chevron transition",
+        "Segmented Button component \u2014 single select, multi-select, icon variants \u2014 all states, light + dark",
+        "Data Table component \u2014 sort, select, paginate, bulk action toolbar \u2014 all row states, badges, light + dark"
+      ],
+      "components_complete": [
+        "button",
+        "slider",
+        "radio_button",
+        "data_table",
+        "navigation",
+        "segmented_button",
+        "dialog",
+        "chip",
+        "card",
+        "input",
+        "fab",
+        "accordion",
+        "tabs",
+        "badge",
+        "checkbox"
+      ],
+      "pending": [
+        "Full Page Preview \u2014 homepage hero + member dashboard using all approved components"
+      ],
+      "known_issue": "Toggle button still not visually confirmed as correct by Dan. Root cause documented: use <div> not <button>, bg #3c4b33 !important. Will revisit next session.",
+      "end_of_session_note": "Session paused 2026-05-04 at Dan request. All nav/chip/badge/dialog/fab tokens saved. Toggle button fix documented in JSON but needs visual confirmation next session.",
+      "confirmed": [
+        "Toggle button on green header CONFIRMED by Dan 2026-05-04",
+        "Final values: bg #4a5d40, text #000000, border rgba(0,0,0,0.45), element <div>"
+      ]
+    },
+    {
+      "date": "2026-05-05",
+      "session": "Session 4 \u2014 Component completion sprint",
+      "completed": [
+        "Checkbox \u2014 all variants and states, 1px, light + dark",
+        "Radio Button \u2014 all variants and states, 1px, light + dark",
+        "Slider \u2014 continuous, discrete, range variants, all states, light + dark",
+        "Tabs \u2014 primary text, primary icon+label, secondary, all states, light + dark",
+        "Accordion \u2014 standalone, icon+subtitle, group variants, all states, light + dark",
+        "Segmented Button \u2014 single select, multi-select, icon variants, all states, light + dark",
+        "Data Table \u2014 sort, select, paginate, bulk toolbar, badges, all states, light + dark",
+        "Banner / Alert \u2014 full banner + inline alert, all 4 semantic types, light + dark",
+        "Foundation: Spacing & Grid tokens locked (8pt base, full scale + layout values)",
+        "Foundation: Elevation tokens locked (6 levels, tonal surface approach, no drop shadows)",
+        "Foundation: Motion tokens locked (duration scale, 4 easing curves, component defaults)",
+        "Terrain texture component removed at Dan's request \u2014 not part of AD Design System",
+        "JSON saved as complete \u2014 all components and foundation tokens done",
+        "Login page pattern complete \u2014 70/20/10 color ratio, all 3 states",
+        "Dashboard page pattern complete \u2014 70/15/15 color ratio"
+      ],
+      "components_complete": [
+        "button_filled",
+        "button_outlined",
+        "button_text",
+        "button_tonal",
+        "card_elevated",
+        "card_filled",
+        "card_outlined",
+        "chip_filter",
+        "chip_input",
+        "dialog",
+        "divider",
+        "fab",
+        "icon_button",
+        "list",
+        "menu",
+        "navigation_bar",
+        "navigation_drawer",
+        "progress_indicator",
+        "search_bar",
+        "snackbar",
+        "switch",
+        "text_field_filled",
+        "text_field_outlined",
+        "tooltip",
+        "top_app_bar",
+        "button",
+        "card",
+        "input",
+        "navigation",
+        "chip",
+        "badge",
+        "checkbox",
+        "radio_button",
+        "slider",
+        "tabs",
+        "accordion",
+        "segmented_button",
+        "data_table",
+        "banner_alert"
+      ],
+      "foundation_complete": [
+        "colors",
+        "typography",
+        "spacing",
+        "elevation",
+        "motion",
+        "border_radius",
+        "logo"
+      ],
+      "status": "ALL COMPONENTS COMPLETE \u2014 ready for Page Patterns phase",
+      "next_phase": "Page Patterns \u2014 login, dashboard, data table page, form page, profile, settings"
+    },
+    {
+      "date": "2026-05-05",
+      "session": "Session 5 \u2014 Page Patterns completion sprint",
+      "completed": [
+        "Data Table page pattern \u2014 70/15/15 ratio, orders table with search/filter toolbar, stat cards, sort/pagination, 5 status badges, dark mode",
+        "Form page pattern \u2014 70/15/15 ratio, 4-step stepper, 3 form sections, text fields/selects/radios/checkboxes/textarea, form action bar, dark mode",
+        "Profile page pattern \u2014 70/15/15 ratio, Arvo hero with avatar, 2-col contact + performance grid, tier progress bar, activity timeline, dark mode",
+        "Settings page pattern \u2014 70/15/15 ratio, dual-level nav (portal nav + settings category nav), notification toggles with channel pills, delivery selects, danger zone, dark mode"
+      ],
+      "pages_complete": [
+        "login_page (70/20/10)",
+        "dashboard (70/15/15)",
+        "data_table_page (70/15/15)",
+        "form_page (70/15/15)",
+        "profile_page (70/15/15)",
+        "settings_page (70/15/15)"
+      ],
+      "color_system_finalized": {
+        "rule": "70% primary / 15% secondary / 15% tertiary on all pages except login (70/20/10)",
+        "primary_role": "Structural dominance \u2014 app bar, nav, CTAs, active states, progress",
+        "secondary_role": "Supporting chrome \u2014 headers, labels, inactive states, secondary actions",
+        "tertiary_role": "Accent energy \u2014 badges, warnings, amber highlights, draft/export actions"
+      },
+      "status": "AD AI-FIRST DESIGN SYSTEM \u2014 FULLY COMPLETE",
+      "total_components": 39,
+      "total_pages": 6,
+      "foundation_tokens": 7,
+      "design_system_version": "1.0 FINAL \u2014 2026-05-05"
+    }
+  ]
+}
